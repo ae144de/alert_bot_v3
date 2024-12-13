@@ -49,7 +49,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     setErrorMessage('');
 
     try{
-      const response = await fetch('http://localhost:5000/api/alerts', {
+      const response = await fetch('http://ec2-13-60-58-64.eu-north-1.compute.amazonaws.com:5000/api/alerts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({selectedSymbol:symbol, operator:operator, value: parseFloat(value), type: alertType, created_at: getFormattedCurrentDate(), status: 'Active'})
