@@ -29,7 +29,7 @@ export default function AlertTable() {
     // const data = await res.json();
     // setAlerts(data);
     try {
-      const response = await fetch('http://ec2-13-60-58-64.eu-north-1.compute.amazonaws.com:5000/api/alerts');
+      const response = await fetch(`${API_BASE_URL}`);
       if (!response.ok){
         console.error('Failed to fetch alerts: ', response.statusText);
         return;
@@ -93,7 +93,7 @@ export default function AlertTable() {
       // Change the line  below for the prod version.
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
-      const response = await fetch(`http://ec2-13-60-58-64.eu-north-1.compute.amazonaws.com:5000/api/alerts/${selectedAlertForDelete.id}`, {
+      const response = await fetch(`${API_BASE_URL}/alerts/${selectedAlertForDelete.id}`, {
         method: 'DELETE'
       });
       if(response.ok) {

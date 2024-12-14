@@ -60,7 +60,7 @@ export default function AlertForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {selectedSymbol, operator, value: parseFloat(value)};
-    const response = await fetch('http://ec2-13-60-58-64.eu-north-1.compute.amazonaws.com:5000/api/alerts', {
+    const response = await fetch(`${API_BASE_URL}/alerts`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload),
