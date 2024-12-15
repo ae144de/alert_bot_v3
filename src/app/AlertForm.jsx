@@ -54,7 +54,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     setErrorMessage('');
 
     try{
-      const response = await fetch('${API_BASE_URL}/api/alerts', {
+      const response = await fetch(`${API_BASE_URL}/api/alerts`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({selectedSymbol:symbol, operator:operator, value: parseFloat(value), type: alertType, created_at: getFormattedCurrentDate(), status: 'Active'})
