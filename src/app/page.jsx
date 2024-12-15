@@ -60,7 +60,7 @@ export default function AlertForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {selectedSymbol, operator, value: parseFloat(value)};
-    const response = await fetch(`${API_BASE_URL}/alerts`, {
+    const response = await fetch(`${API_BASE_URL}/api/alerts`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload),

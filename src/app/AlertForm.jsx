@@ -4,7 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel } from '@mui/material';
 import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
+
 
 export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [symbol, setSymbol] = useState('BTCUSDT');
@@ -51,7 +53,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     setErrorMessage('');
 
     try{
-      const response = await fetch('${API_BASE_URL}/alerts', {
+      const response = await fetch('${API_BASE_URL}/api/alerts', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({selectedSymbol:symbol, operator:operator, value: parseFloat(value), type: alertType, created_at: getFormattedCurrentDate(), status: 'Active'})

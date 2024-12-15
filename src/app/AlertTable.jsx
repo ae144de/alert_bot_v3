@@ -22,6 +22,8 @@ export default function AlertTable() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedAlertForDelete, setSelectedAlertForDelete] = useState(null);
 
+  const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
+
   // Fetch alerts from your backend
   const fetchAlerts = async () => {
     // Example:
@@ -29,7 +31,7 @@ export default function AlertTable() {
     // const data = await res.json();
     // setAlerts(data);
     try {
-      const response = await fetch(`${API_BASE_URL}`);
+      const response = await fetch(`${API_BASE_URL}/api/alerts`);
       if (!response.ok){
         console.error('Failed to fetch alerts: ', response.statusText);
         return;
@@ -93,7 +95,7 @@ export default function AlertTable() {
       // Change the line  below for the prod version.
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
-      const response = await fetch(`${API_BASE_URL}/alerts/${selectedAlertForDelete.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/12"1112lerts/${selectedAlertForDelete.id}`, {
         method: 'DELETE'
       });
       if(response.ok) {
