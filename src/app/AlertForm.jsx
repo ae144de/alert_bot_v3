@@ -5,7 +5,6 @@ import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel } from
 import axios from 'axios';
 
 // const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
-const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
 
 
 export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
@@ -16,6 +15,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   
+  const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
+
 
   function getFormattedCurrentDate() {
     const current_date = new Date();
