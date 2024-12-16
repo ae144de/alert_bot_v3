@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 export default function UserPage(){
-    const {data: session, status} = useSession();
+    const {session, status} = useSession();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loading, setLoading] = useState(true);
 
