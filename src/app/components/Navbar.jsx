@@ -43,7 +43,7 @@ export default function Navbar() {
         ) : (
           <>
             {/* Sign In/Register Buttons */}
-            <Button color="inherit"  variant="outlined" onClick={() => signIn('google')}>
+            <Button color="inherit"  variant="outlined" sx={{mr:'2px !important'}} onClick={() => signIn('google')}>
               Sign In with Google
             </Button>
             <Button color="inherit" variant="outlined" onClick={() => signIn('discord')}>
