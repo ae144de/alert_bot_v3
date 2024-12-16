@@ -22,7 +22,6 @@ import {
 import axios from "axios";
 import AlertTable from "./AlertTable";
 import {SessionProvider} from "next-auth/react";
-import { Providers } from "./providers";
 
 const darkTheme = createTheme({
   palette: {
@@ -78,7 +77,6 @@ export default function AlertForm() {
 
   return (
     // <SessionProvider session={session}>
-      <Providers>
         <ThemeProvider theme={darkTheme}>
           <CssBaseline />
           <Box
@@ -94,7 +92,6 @@ export default function AlertForm() {
             <AlertTable />
           </Box>
         </ThemeProvider>
-      </Providers>
       
     // </SessionProvider>
   )
