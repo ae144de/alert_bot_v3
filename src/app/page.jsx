@@ -21,6 +21,8 @@ import {
 } from '@mui/material';
 import axios from "axios";
 import AlertTable from "./AlertTable";
+import {SessionProvider} from "next-auth/react";
+import { Providers } from "./providers";
 
 const darkTheme = createTheme({
   palette: {
@@ -75,21 +77,25 @@ export default function AlertForm() {
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-    <Box
-      sx={{
-        display:'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: "100vh",
-        width:'100%'
+    // <SessionProvider session={session}>
+      <Providers>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Box
+            sx={{
+              display:'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: "100vh",
+              width:'100%'
 
-      }}
-    >
-      <AlertTable />
-    </Box>
-    </ThemeProvider>
-
+            }}
+          >
+            <AlertTable />
+          </Box>
+        </ThemeProvider>
+      </Providers>
+      
+    // </SessionProvider>
   )
 }
