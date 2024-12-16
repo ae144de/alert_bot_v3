@@ -19,12 +19,12 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static"  sx={{backgroundColor:'transparent'}}>
       <Toolbar>
         {/* Application Title */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link href="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            MyApp
+            alertBOT
           </Link>
         </Typography>
 
