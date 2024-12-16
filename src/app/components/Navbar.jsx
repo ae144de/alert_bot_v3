@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static"  sx={{backgroundColor:'transparent'}}>
+    <AppBar position="static"  sx={{backgroundColor:'transparent', boxShadow:'none'}}>
       <Toolbar>
         {/* Application Title */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
