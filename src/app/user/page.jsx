@@ -78,7 +78,7 @@ export default function UserPage(){
           <Typography variant="h6" gutterBottom>
             Update Phone Number
           </Typography>
-          <Typography
+          <TextField
             label="Phone Number"
             type="tel"
             fullWidth
