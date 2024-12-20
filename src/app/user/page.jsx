@@ -39,6 +39,7 @@ export default function UserPage(){
       e.preventDefault();
       setUpdating(true);
       try {
+        console.log("ACCESS TOKEN: ",session.accessToken);
         const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/updatePhoneNumber', 
           { phoneNumber },
           { headers: { Authorization: `Bearer ${session.accessToken}` } }
