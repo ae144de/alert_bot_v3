@@ -20,7 +20,8 @@ export default function UserPage(){
             console.log("USER AUTHENTICATED!!!");
             axios.get('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/getUserData', {
               headers: {
-                Authorization: `Bearer ${session.accessToken}`
+                Authorization: `Bearer ${session.accessToken}`,
+                "Content-Type": 'application/json'
               }
             }).then(response => {
               setPhoneNumber(response.data.phoneNumber || '');
