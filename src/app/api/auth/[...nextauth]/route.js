@@ -12,6 +12,10 @@ const handler = NextAuth({
     
   ],
   session: { strategy: 'jwt' },
+  jwt: {
+    // You can define a custom secret or rely on NEXTAUTH_SECRET
+    secret: process.env.NEXTAUTH_SECRET,
+  },
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
