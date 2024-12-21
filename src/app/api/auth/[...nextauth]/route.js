@@ -15,6 +15,8 @@ const handler = NextAuth({
   jwt: {
     // You can define a custom secret or rely on NEXTAUTH_SECRET
     secret: process.env.NEXTAUTH_SECRET,
+    maxAge: 60 * 60 * 48,
+    
   },
   callbacks: {
     async jwt({ token, account, profile }) {
