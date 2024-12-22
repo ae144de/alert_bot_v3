@@ -37,6 +37,8 @@ const handler = NextAuth({
       if (token?.user) {
         session.user = token.user
       }
+
+        session.accessToken = token.accessToken;
         // Send properties to the client, like an access_token from a provider.
         // session.accessToken = token.accessToken;
         // session.user.email = token.email;
