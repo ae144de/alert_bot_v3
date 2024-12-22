@@ -21,27 +21,27 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        // token.user = {
-        //   name: profile.name,
-        //   email: profile.email,
-        //   image: profile.picture
-        // }
-        token.accessToken = account.access_token;
-        token.email = profile.email;
-        token.name = profile.name || profile.username;
-        token.picture = profile.picture || profile.avatar;
+        token.user = {
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture
+        };
+        // token.accessToken = account.access_token;
+        // token.email = profile.email;
+        // token.name = profile.name || profile.username;
+        // token.picture = profile.picture || profile.avatar;
       }
       return token
     },
     async session({ session, token }) {
-    //   if (token?.user) {
-    //     session.user = token.user
-    //   }
+      if (token?.user) {
+        session.user = token.user
+      }
         // Send properties to the client, like an access_token from a provider.
-        session.accessToken = token.accessToken;
-        session.user.email = token.email;
-        session.user.name = token.name;
-        session.user.image = token.picture;
+        // session.accessToken = token.accessToken;
+        // session.user.email = token.email;
+        // session.user.name = token.name;
+        // session.user.image = token.picture;
         return session
     }
   }
