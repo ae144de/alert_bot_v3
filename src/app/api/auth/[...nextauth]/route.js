@@ -2,6 +2,7 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import DiscordProvider from "next-auth/providers/discord"
+import { encode, decode } from "next-auth/jwt"
 
 const handler = NextAuth({
   providers: [
@@ -20,24 +21,26 @@ const handler = NextAuth({
   },
   callbacks: {
     async jwt({ token, account, profile }) {
-      // if (account && profile) {
-      //   token.user = {
-      //     name: profile.name,
-      //     email: profile.email,
-      //     image: profile.picture
-      //   };
+      if (account && profile) {
+        token.user = {
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture
+        };
         // token.accessToken = account.access_token;
         // token.email = profile.email;
         // token.name = profile.name || profile.username;
         // token.picture = profile.picture || profile.avatar;
-      // }
-      return token;
+      }
+      return token
     },
     async session({ session, token }) {
       // if (token?.user) {
       //   session.user = token.user
       // }
-      session.rawJwt = token;
+      const acc_token = token.accessToken;
+      secret = process.env.NEXTAUTH_SECRET;
+      const encoded_token = await encode({acc_token, secret});
       //   session.accessToken = token.accessToken;
         // Send properties to the client, like an access_token from a provider.
         // session.accessToken = token.accessToken;
