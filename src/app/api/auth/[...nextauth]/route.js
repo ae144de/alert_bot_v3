@@ -38,9 +38,9 @@ const handler = NextAuth({
       // if (token?.user) {
       //   session.user = token.user
       // }
-      const acc_token = token.accessToken;
-      secret = process.env.NEXTAUTH_SECRET;
-      const encoded_token = await encode({acc_token, secret});
+      // const acc_token = token.accessToken;
+      // secret = process.env.NEXTAUTH_SECRET;
+      // const encoded_token = await encode({acc_token, secret});
       //   session.accessToken = token.accessToken;
         // Send properties to the client, like an access_token from a provider.
         // session.accessToken = token.accessToken;
