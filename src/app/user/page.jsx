@@ -72,6 +72,7 @@ export default function UserPage(){
           <h1>User Info</h1>
           <p>Signed in as: {session.user.email}</p>
           <p>Name: {session.user.name}</p>
+          <p>JWT ACCESS TOKEN: {session.accessToken}</p>
           {session.user.image && <img src={session.user.image} alt="User Image" style={{ width: 50, height: 50 }} />}
           {/*  */}
           <button onClick={() => signOut()}>Sign Out</button>
