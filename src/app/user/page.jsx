@@ -45,7 +45,7 @@ export default function UserPage(){
 
         const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/updatePhoneNumber', 
           { phoneNumber },
-          { headers: { Authorization: `Bearer ${session.accessToken}` } }
+          { headers: { Authorization: `Bearer ${session?.myCustomToken}` } }
         );
         alert(response.data.message);
       } catch (error) {

@@ -4,6 +4,7 @@ import GoogleProvider from "next-auth/providers/google"
 import DiscordProvider from "next-auth/providers/discord"
 import { encode, decode } from "next-auth/jwt"
 import jwt from 'jsonwebtoken';
+import { db } from "@/app/user/firebaseAdmin";
 
 const handler = NextAuth({
   
@@ -21,7 +22,31 @@ const handler = NextAuth({
     // maxAge: 60 * 60 * 48,
     
   },
+  
   callbacks: {
+    async signIn({ user, account, profile}) {
+      try {
+        if (!user.email) {
+          return false;
+        }
+
+        const userId = user.email.replaceAll('.', '_');
+        const userRef = db.ref(`/${userId}`);
+        const snapshot = await userRef.once("value");
+        if (!snapshot.exists()) {
+          await userRef.set({
+              email: user.email,
+              phoneNumber: "",
+              alerts:null
+          });
+        }
+
+        return true;
+      } catch (error) {
+        console.error("Error in signIn callback: ", error);
+        return false;
+      }
+    },
     async jwt({ token, account, profile, user }) {
       // jwt() is called whenever a token is created/updated.
       // if (account?.access_token) {
