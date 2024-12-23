@@ -41,11 +41,16 @@ export default function UserPage(){
       e.preventDefault();
       setUpdating(true);
       try {
-        console.log("ACCESS TOKEN: ",session.accessToken);
+        console.log("ACCESS TOKEN: ",session?.myCustomToken);
 
         const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/updatePhoneNumber', 
           { phoneNumber },
-          { headers: { Authorization: `Bearer ${session?.myCustomToken}` } }
+          { 
+            headers: { 
+              Authorization: `Bearer ${session?.myCustomToken}`,
+              "Content-Type": 'application/json'
+            } 
+          }
         );
         alert(response.data.message);
       } catch (error) {
