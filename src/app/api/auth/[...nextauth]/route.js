@@ -21,18 +21,29 @@ const handler = NextAuth({
     
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account, profile, user }) {
       // jwt() is called whenever a token is created/updated.
-      if (account?.access_token) {
-        token.accessToken = account.access_token;
+      // if (account?.access_token) {
+      //   token.accessToken = account.access_token;
+      // }
+      // return token;
+      // If user just signed in, store user details in the token
+      if (user) {
+        token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
       }
       return token;
     },
     async session({ session, token }) {
       // session() callback is called whenever a session is checked(e.g. getSession())
-      if (token?.accessToken) {
-        session.accessToken = token.accessToken;
-      }
+      // if (token?.accessToken) {
+      //   session.accessToken = token.accessToken;
+      // }
+      // return session;
+      // Expose the *entire* NextAuth token in the session,
+      // so you can pass it to Flask.
+      session.myCustomToken = token;
       return session;
     }
   }
