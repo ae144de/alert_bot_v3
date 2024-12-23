@@ -5,6 +5,7 @@ import DiscordProvider from "next-auth/providers/discord"
 import { encode, decode } from "next-auth/jwt"
 
 const handler = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -16,21 +17,13 @@ const handler = NextAuth({
   jwt: {
     // You can define a custom secret or rely on NEXTAUTH_SECRET
     secret: process.env.NEXTAUTH_SECRET,
-    maxAge: 60 * 60 * 48,
+    // maxAge: 60 * 60 * 48,
     
   },
   callbacks: {
     async jwt({ token, account, profile }) {
-      if (account && profile) {
-        token.user = {
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture
-        };
-        // token.accessToken = account.access_token;
-        // token.email = profile.email;
-        // token.name = profile.name || profile.username;
-        // token.picture = profile.picture || profile.avatar;
+      if (account) {
+        token.accessToken = account.access_token;
       }
       return token
     },
@@ -47,7 +40,10 @@ const handler = NextAuth({
         // session.user.email = token.email;
         // session.user.name = token.name;
         // session.user.image = token.picture;
-        return session
+        session.user.id = token.sub;
+        session.accessToken = token.accessToken;
+        return session;
+        // return session
     }
   }
 })
