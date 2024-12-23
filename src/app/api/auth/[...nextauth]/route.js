@@ -24,6 +24,7 @@ const handler = NextAuth({
     async jwt({ token, account, profile }) {
       if (account) {
         token.accessToken = account.access_token;
+        console.log('TOKEN ACCESS_TOKEN: ',account.access_token);
       }
       return token
     },
@@ -40,7 +41,8 @@ const handler = NextAuth({
         // session.user.email = token.email;
         // session.user.name = token.name;
         // session.user.image = token.picture;
-        session.user.id = token.sub;
+        // session.user.id = token.sub;
+        console.log('SESSION: ',session);
         session.accessToken = token.accessToken;
         return session;
         // return session
