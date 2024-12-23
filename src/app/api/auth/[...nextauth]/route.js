@@ -31,7 +31,7 @@ const handler = NextAuth({
         }
 
         const userId = user.email.replaceAll('.', '_');
-        const userRef = db.ref(`/${userId}`);
+        const userRef = db.ref(`${userId}`);
         const snapshot = await userRef.once("value");
         if (!snapshot.exists()) {
           await userRef.set({
