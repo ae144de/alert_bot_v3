@@ -3,6 +3,7 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import DiscordProvider from "next-auth/providers/discord"
 import { encode, decode } from "next-auth/jwt"
+import jwt from 'jsonwebtoken';
 
 const handler = NextAuth({
   
@@ -43,7 +44,10 @@ const handler = NextAuth({
       // return session;
       // Expose the *entire* NextAuth token in the session,
       // so you can pass it to Flask.
-      session.myCustomToken = token;
+      const signedJWT = jwt.sign(token, process.env.NEXTAUTH_SECRET, {
+        algorithm: "HS256",
+      });
+      session.myCustomToken = signedJWT;
       return session;
     }
   }
