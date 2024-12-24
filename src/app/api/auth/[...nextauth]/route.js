@@ -24,29 +24,8 @@ const handler = NextAuth({
   },
   
   callbacks: {
-    async signIn({ user, account, profile}) {
-      try {
-        if (!user.email) {
-          return false;
-        }
-
-        const userId = user.email.replaceAll('.', '_');
-        const userRef = db.ref(`${userId}`);
-        const snapshot = await userRef.once("value");
-        if (!snapshot.exists()) {
-          await userRef.set({
-              email: user.email,
-              phoneNumber: "",
-              alerts:null
-          });
-        }
-
-        return true;
-      } catch (error) {
-        console.error("Error in signIn callback: ", error);
-        return false;
-      }
-    },
+    
+     
     async jwt({ token, account, profile, user }) {
       // jwt() is called whenever a token is created/updated.
       // if (account?.access_token) {
@@ -73,6 +52,10 @@ const handler = NextAuth({
         algorithm: "HS256",
       });
       session.myCustomToken = signedJWT;
+
+      //user info
+      session.email = token.email;
+      session.name = token.name;
       return session;
     }
   }
