@@ -1,30 +1,23 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import DiscordProvider from "next-auth/providers/discord"
-import { encode, decode } from "next-auth/jwt"
-import jwt from 'jsonwebtoken';
-import { db } from "@/app/user/firebaseAdmin";
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+// import DiscordProvider from "next-auth/providers/discord";
+// import { encode, decode } from "next-auth/jwt"; // Unused
+import jwt from "jsonwebtoken";
+// import { db } from "@/app/user/firebaseAdmin"; // If not used, remove or comment out
 
 const handler = NextAuth({
-  
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    
   ],
-  session: { strategy: 'jwt' },
-  jwt: {
+  session: { strategy: "jwt" },
+  jwt: {
     secret: process.env.NEXTAUTH_SECRET,
-    
   },
-  
   callbacks: {
-    
-     
-    async jwt({ token, account, profile, user }) {
-      
+    async jwt({ token, user }) {
       if (user) {
         token.email = user.email;
         token.name = user.name;
@@ -33,19 +26,15 @@ const handler = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      
       const signedJWT = jwt.sign(token, process.env.NEXTAUTH_SECRET, {
         algorithm: "HS256",
       });
       session.myCustomToken = signedJWT;
-
       session.email = token.email;
       session.name = token.name;
-
-      
       return session;
-    }
-  }
-})
+    },
+  },
+});
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
