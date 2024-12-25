@@ -55,6 +55,8 @@ const handler = NextAuth({
       //user info
       session.email = token.email;
       session.name = token.name;
+
+      
       return session;
     }
   }
