@@ -50,6 +50,8 @@ export default function AlertTable() {
     // ]);
   };
 
+  
+
   useEffect(() => {
     fetchAlerts();
     console.log("[*ALERTS]: ", alerts);
@@ -66,6 +68,7 @@ export default function AlertTable() {
   const handleFormSubmit = () => {
     // Refresh the alerts after creating a new one
     fetchAlerts();
+    
   };
 
   const handleOpenInfoModal = (alert) => {

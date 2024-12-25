@@ -14,6 +14,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [symbols, setSymbols] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const {data: session, status} = useSession();
+  
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
 
@@ -56,7 +58,10 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     try{
       const response = await fetch(`${API_BASE_URL}/api/alerts`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Authorization': `Bearer ${session?.myCustomToken}`,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({selectedSymbol:symbol, operator:operator, value: parseFloat(value), type: alertType, created_at: getFormattedCurrentDate(), status: 'Active'})
       });
   

@@ -62,7 +62,7 @@ export default function AlertForm() {
 
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmitAlert = async (e) => {
     e.preventDefault();
     const payload = {selectedSymbol, operator, value: parseFloat(value)};
     // const response = await fetch(`${API_BASE_URL}/api/alerts`, {
@@ -106,7 +106,7 @@ export default function AlertForm() {
 
             }}
           >
-            <AlertTable />
+            <AlertTable/>
           </Box>
         </ThemeProvider>
       
