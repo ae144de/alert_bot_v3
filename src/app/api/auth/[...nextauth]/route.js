@@ -4,7 +4,7 @@ import GoogleProvider from "next-auth/providers/google";
 // import { encode, decode } from "next-auth/jwt"; // Unused
 import jwt from "jsonwebtoken";
 // import { db } from "@/app/user/firebaseAdmin"; // If not used, remove or comment out
-
+//fsgfd
 const handler = NextAuth({
   providers: [
     GoogleProvider({
