@@ -13,8 +13,11 @@ import EditIcon from '@mui/icons-material/Edit';
 import CreateAlertPopup from './CreateAlertPopup';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 export default function AlertTable() {
+  const {data: session, status} = useSession()
   const [alerts, setAlerts] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [infoModalOpen, setInfoModalOpen] = useState(false);
@@ -31,7 +34,13 @@ export default function AlertTable() {
     // const data = await res.json();
     // setAlerts(data);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/alerts`);
+      // const response = await fetch(`${API_BASE_URL}/api/alerts`);
+      const response = await axios.get(`${API_BASE_URL}/api/alerts`, {
+        headers: {
+          Authorization:`Bearer ${session?.myCustomToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
       if (!response.ok){
         console.error('Failed to fetch alerts: ', response.statusText);
         return;
@@ -98,7 +107,7 @@ export default function AlertTable() {
       // Change the line  below for the prod version.
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
-      const response = await fetch(`${API_BASE_URL}/api/12"1112lerts/${selectedAlertForDelete.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/alerts/${selectedAlertForDelete.id}`, {
         method: 'DELETE'
       });
       if(response.ok) {
