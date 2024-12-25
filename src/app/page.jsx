@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import axios from "axios";
 import AlertTable from "./AlertTable";
-import {SessionProvider} from "next-auth/react";
+import {SessionProvider, useSession} from "next-auth/react";
 
 const darkTheme = createTheme({
   palette: {
@@ -40,6 +40,7 @@ export default function AlertForm() {
   const [symbols, setSymbols] = useState([]);
   const [selectedSymbol, setSelectedSymbol] = useState('BTCUSDT');
 
+  const {data: session, status} = useSession();
 
   useEffect(() => {
     const fetchSymbols = async () => {
@@ -55,15 +56,21 @@ export default function AlertForm() {
       }
     }
 
+
     fetchSymbols();
   }, []);
+
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {selectedSymbol, operator, value: parseFloat(value)};
     const response = await fetch(`${API_BASE_URL}/api/alerts`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Authorization': `Bearer ${session?.myCustomToken}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(payload),
     });
 
