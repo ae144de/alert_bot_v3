@@ -65,14 +65,23 @@ export default function AlertForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {selectedSymbol, operator, value: parseFloat(value)};
-    const response = await fetch(`${API_BASE_URL}/api/alerts`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${session?.myCustomToken}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload),
-    });
+    // const response = await fetch(`${API_BASE_URL}/api/alerts`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Authorization': `Bearer ${session?.myCustomToken}`,
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(payload),
+    // });
+    const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/alerts',
+      {payload},
+      {
+        headers: {
+          Authorization: `Bearer ${session?.myCustomToken}`,
+          "Content-Type": 'application/json'
+        }
+      }
+    )
 
     if (response.ok) {
       setSelectedSymbol('BTCUSDT');
