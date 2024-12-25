@@ -74,7 +74,7 @@ export default function AlertForm() {
     //   body: JSON.stringify(payload),
     // });
     console.log('TOKEN: ', session?.myCustomToken);
-    const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/alerts',
+    const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/alerts',
       {payload},
       {
         headers: {
