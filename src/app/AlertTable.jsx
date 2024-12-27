@@ -41,10 +41,10 @@ export default function AlertTable() {
           'Content-Type': 'application/json',
         },
       });
-      if (!response.ok){
-        console.error('Failed to fetch alerts: ', response.statusText);
-        return;
-      }
+      // if (!response.ok){
+      //   console.error('Failed to fetch alerts: ', response.statusText);
+      //   return;
+      // }
       const data = await response.json();
       console.log('Alerts Data: ',data);
       console.log('My Token: ', session?.myCustomToken);
