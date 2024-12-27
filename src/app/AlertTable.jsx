@@ -46,6 +46,8 @@ export default function AlertTable() {
         return;
       }
       const data = await response.json();
+      console.log('Alerts Data: ',data);
+      console.log('My Token: ', session?.myCustomToken);
       setAlerts(data);
     } catch (error) {
       console.error('Error fetching alerts: ',error);

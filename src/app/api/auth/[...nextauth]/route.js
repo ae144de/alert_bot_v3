@@ -17,7 +17,8 @@ const handler = NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, profie}) {
+
       if (user) {
         token.email = user.email;
         token.name = user.name;
