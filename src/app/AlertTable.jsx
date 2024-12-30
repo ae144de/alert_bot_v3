@@ -47,10 +47,10 @@ export default function AlertTable() {
       //   console.error('Failed to fetch alerts: ', response.statusText);
       //   return;
       // }
-      const data = await response.json();
+      const data = response.json();
       console.log('Alerts Data: ',data);
       console.log('My Token: ', session?.myCustomToken);
-      setAlerts(data);
+      setAlerts(data.alerts);
     } catch (error) {
       console.error('Error fetching alerts: ',error);
     }
