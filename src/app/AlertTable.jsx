@@ -66,7 +66,7 @@ export default function AlertTable() {
   useEffect(() => {
     fetchAlerts();
     console.log("[*ALERTS]: ", alerts);
-  }, []);
+  }, [alerts]);
 
   const handleOpenPopover = (event) => {
     setAnchorEl(event.currentTarget);
