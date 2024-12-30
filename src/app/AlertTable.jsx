@@ -35,6 +35,7 @@ export default function AlertTable() {
     // setAlerts(data);
     try {
       // const response = await fetch(`${API_BASE_URL}/api/alerts`);
+      console.log(`myCustomToken: ${session?.myCustomToken}`);
       const response = await axios.get(`${API_BASE_URL}/api/alerts`, {
         headers: {
           Authorization:`Bearer ${session?.myCustomToken}`,
