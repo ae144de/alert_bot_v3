@@ -262,7 +262,7 @@ export default function AlertTable() {
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2, gap: 1 }}>
             <Button onClick={handleCloseDeleteModal}>Cancel</Button>
-            <Button variant="contained" color="error" onClick={handleDeleteAlertConfirm(alert.alert_id)}>Delete</Button>
+            <Button variant="contained" color="error" onClick={() => handleDeleteAlertConfirm(alert.id)}>Delete</Button>
           </Box>
         </Box>
       </Modal>
