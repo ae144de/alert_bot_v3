@@ -53,8 +53,10 @@ export default function AlertTable() {
   
 
   useEffect(() => {
-    fetchAlerts();
-    console.log("[*ALERTS]: ", alerts);
+    if (session) {
+      fetchAlerts();
+      console.log("[*ALERTS]: ", alerts);
+    }
   }, []);
 
   const handleOpenPopover = (event) => {
