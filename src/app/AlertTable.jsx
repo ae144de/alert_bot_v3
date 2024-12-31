@@ -101,7 +101,11 @@ export default function AlertTable() {
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
       const response = await fetch(`${API_BASE_URL}/api/alerts/${selectedAlertForDelete.alert_id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${session?.myCustomToken}`,
+          'Content-Type': 'application/json',
+        },
       });
       if(response.ok) {
         fetchAlerts();
