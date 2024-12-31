@@ -136,7 +136,7 @@ export default function AlertTable() {
           </TableHead>
           <TableBody>
             {alerts.map((alert) => (
-              <TableRow key={alert.alert_id}>
+              <TableRow key={alert.id}>
                 <TableCell>{alert.alert_id}</TableCell>
                 <TableCell>{alert.type}</TableCell>
                 <TableCell>
