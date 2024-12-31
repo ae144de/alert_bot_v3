@@ -27,6 +27,7 @@ export default function AlertTable() {
 
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
 
+  //TestUpdate
   // Fetch alerts from your backend
   const fetchAlerts = async () => {
     // Example:
