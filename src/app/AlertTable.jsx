@@ -100,7 +100,7 @@ export default function AlertTable() {
       // Change the line  below for the prod version.
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
-      const response = await fetch(`${API_BASE_URL}/api/alerts/${selectedAlertForDelete.id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/alerts/${selectedAlertForDelete.alert_id}`, {
         method: 'DELETE'
       });
       if(response.ok) {
@@ -216,7 +216,7 @@ export default function AlertTable() {
               <Typography component='div' variant="h6" gutterBottom>Alert Information</Typography>
 
               <Divider sx={{ mb:1, mt:1 }}/>
-              <Typography component='div'><strong>Alert:</strong> {selectedAlert.alert_id}</Typography>
+              <Typography component='div'><strong>Alert:</strong> {selectedAlert.id}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Type:</strong> {selectedAlert.type}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
