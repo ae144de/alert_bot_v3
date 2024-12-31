@@ -216,7 +216,7 @@ export default function AlertTable() {
               <Typography component='div' variant="h6" gutterBottom>Alert Information</Typography>
 
               <Divider sx={{ mb:1, mt:1 }}/>
-              <Typography component='div'><strong>Alert:</strong> {selectedAlert.id}</Typography>
+              <Typography component='div'><strong>Alert:</strong> {selectedAlert.alert_id}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Type:</strong> {selectedAlert.type}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
@@ -262,7 +262,7 @@ export default function AlertTable() {
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2, gap: 1 }}>
             <Button onClick={handleCloseDeleteModal}>Cancel</Button>
-            <Button variant="contained" color="error" onClick={handleDeleteAlertConfirm}>Delete</Button>
+            <Button variant="contained" color="error" onClick={handleDeleteAlertConfirm(alert.alert_id)}>Delete</Button>
           </Box>
         </Box>
       </Modal>
