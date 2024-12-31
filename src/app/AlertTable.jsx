@@ -137,7 +137,7 @@ export default function AlertTable() {
           <TableBody>
             {alerts.map((alert) => (
               <TableRow key={alert.id}>
-                <TableCell>{alert.alert_id}</TableCell>
+                <TableCell>{alert.id}</TableCell>
                 <TableCell>{alert.type}</TableCell>
                 <TableCell>
                   {alert.status === "Active" ? (
