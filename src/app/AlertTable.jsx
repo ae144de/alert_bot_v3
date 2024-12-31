@@ -30,38 +30,24 @@ export default function AlertTable() {
   //TestUpdate
   // Fetch alerts from your backend
   const fetchAlerts = async () => {
-    // Example:
-    // const res = await fetch('/api/alerts');
-    // const data = await res.json();
-    // setAlerts(data);
     console.log(`myCustomToken: ${session?.myCustomToken}`);
-
-    try {
-      // const response = await fetch(`${API_BASE_URL}/api/alerts`);
-      const response = await axios.get(`${API_BASE_URL}/api/alerts`, {
-        headers: {
-          Authorization:`Bearer ${session?.myCustomToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      // if (!response.ok){
-      //   console.error('Failed to fetch alerts: ', response.statusText);
-      //   return;
-      // }
-      const data = response.json();
-      console.log('Alerts Data: ',data);
+  
+    axios.get(`${API_BASE_URL}/api/alerts`, {
+      headers: {
+        Authorization: `Bearer ${session?.myCustomToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => {
+      const data = response.data;
+      console.log('Alerts Data: ', data);
       console.log('My Token: ', session?.myCustomToken);
       setAlerts(data.alerts);
-    } catch (error) {
-      console.error('Error fetching alerts: ',error);
-    }
-
-    // Mock data for demonstration:
-    // setAlerts([
-    //   { id: 'alert1', alert: 'BTCUSDT_price', type: 'Price', status: 'Active', created_at: '09-12-2024' },
-    //   { id: 'alert2', alert: 'ETHUSDT_price', type: 'Price', status: 'Done', created_at: '09-12-2024' },
-    //   { id: 'alert3', alert: 'BTCUSDT_price', type: 'Price', status: 'Expired', created_at: '02-11-2023' },
-    // ]);
+    })
+    .catch(error => {
+      console.error('Error fetching alerts: ', error);
+    });
+  
   };
 
   
