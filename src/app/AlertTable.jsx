@@ -57,7 +57,7 @@ export default function AlertTable() {
       fetchAlerts();
       console.log("[*ALERTS]: ", alerts);
     }
-  }, []);
+  }, [session]);
 
   const handleOpenPopover = (event) => {
     setAnchorEl(event.currentTarget);
