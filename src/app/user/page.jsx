@@ -48,7 +48,7 @@ export default function UserPage(){
       try {
         console.log("ACCESS TOKEN: ",session?.myCustomToken);
 
-        const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/updatePhoneNumber', 
+        const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/connectUserBot', 
           {phoneNumber, botToken, chatId},
           { 
             headers: { 
