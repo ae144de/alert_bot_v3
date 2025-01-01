@@ -7,6 +7,8 @@ import { Button, TextField, Typography, Avatar, CircularProgress, Box } from '@m
 export default function UserPage(){
     const {data: session, status} = useSession();
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [botToken, setBotToken] = useState('');
+    const [chatId, setChatId] = useState('');
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
     const [alertSymbol, setAlertSymbol] = useState('');
@@ -14,6 +16,7 @@ export default function UserPage(){
     const [alertValue, setAlertValue] = useState('');
     const [alertLoading, setAlertLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+
 
     useEffect(() => {
         if (status === 'authenticated' && session?.user?.email) {
@@ -27,6 +30,8 @@ export default function UserPage(){
               }
             }).then(response => {
               setPhoneNumber(response.data.phoneNumber || '');
+              setBotToken(response.data.botToken || '');
+              setChatId(response.data.chatId || '');
               setLoading(false);
             }).catch(error => {
               console.error(error);
@@ -44,7 +49,7 @@ export default function UserPage(){
         console.log("ACCESS TOKEN: ",session?.myCustomToken);
 
         const response = await axios.post('http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/api/users/updatePhoneNumber', 
-          {phoneNumber},
+          {phoneNumber, botToken, chatId},
           { 
             headers: { 
               Authorization: `Bearer ${session?.myCustomToken}`,
@@ -96,6 +101,24 @@ export default function UserPage(){
             required
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Bot Token"
+            type="text"
+            fullWidth
+            required
+            value={botToken}
+            onChange={(e) => setBotToken(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="Chat ID"
+            type="text"
+            fullWidth
+            required
+            value={chatId}
+            onChange={(e) => setChatId(e.target.value)}
             sx={{ mb: 2 }}
           />
           <Button type="submit" variant="contained" disabled={updating}>
