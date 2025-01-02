@@ -106,7 +106,7 @@ export default function UserPage(){
           display="flex"
           flexDirection="row"
           alignItems="center"
-          justifyContent="space-around"
+          justifyContent="center"
           minHeight="100vh"
           bgcolor="background.default"
           color="text.primary"
