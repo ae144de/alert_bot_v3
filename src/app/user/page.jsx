@@ -2,7 +2,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme, Card, CardContent, GlobalStyles, CssBaseline } from '@mui/material';
+import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme, Card, CardContent, GlobalStyles, CssBaseline, Stepper, Step, StepLabel } from '@mui/material';
 import { ThemeProvider } from "@emotion/react";
 
 const darkTheme = createTheme({
@@ -10,6 +10,13 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
+
+const steps = [
+  'Sign in to your account',
+  'Enter your phone number, bot token, and chat ID',
+  'Click the Update button to save your information',
+  'Follow the instructions sent to your chat',
+];
 
 
 export default function UserPage(){
@@ -97,7 +104,7 @@ export default function UserPage(){
         <GlobalStyles styles={{ body: { backgroundColor: darkTheme.palette.background.default, color: darkTheme.palette.text.primary } }} />
         <Box
           display="flex"
-          flexDirection="column"
+          flexDirection="row"
           alignItems="center"
           justifyContent="center"
           minHeight="100vh"
@@ -106,75 +113,107 @@ export default function UserPage(){
           p={2}
           m={0}
         >
-          {loading ? (
-            <CircularProgress />
-          ) : (
-            <>
-              <Card sx={{ mb: 4, width: '100%', maxWidth: 600 }}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    User Info
-                  </Typography>
-                  <Typography variant="body1">
-                    Signed in as: {session.user.email}
-                  </Typography>
-                  <Typography variant="body1">
-                    Name: {session.user.name}
-                  </Typography>
-                  {session.user.image && (
-                    <Avatar
-                      src={session.user.image}
-                      alt="User Image"
-                      sx={{ width: 50, height: 50, mt: 2 }}
-                    />
-                  )}
-                </CardContent>
-              </Card>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width="50%"
+            p={2}
+          >
+            {loading ? (
+              <CircularProgress />
+            ) : (
+              <>
+                <Card sx={{ mb: 4, width: '100%', maxWidth: 600 }}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      User Info
+                    </Typography>
+                    <Typography variant="body1">
+                      Signed in as: {session.user.email}
+                    </Typography>
+                    <Typography variant="body1">
+                      Name: {session.user.name}
+                    </Typography>
+                    {session.user.image && (
+                      <Avatar
+                        src={session.user.image}
+                        alt="User Image"
+                        sx={{ width: 50, height: 50, mt: 2 }}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
 
-              <Card sx={{ width: '100%', maxWidth: 600 }}>
-                <CardContent>
-                  <Typography variant="h5" component="div" gutterBottom>
-                    User Form
-                  </Typography>
-                  <form onSubmit={handlePhoneNumberSubmit}>
-                    <TextField
-                      label="Phone Number"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      fullWidth
-                      margin="normal"
-                      error={!validatePhoneNumber(phoneNumber)}
-                      helperText={!validatePhoneNumber(phoneNumber) ? 'Invalid phone number. Must start with +90 and not begin with 0.' : ''}
-                    />
-                    <TextField
-                      label="Bot Token"
-                      value={botToken}
-                      onChange={(e) => setBotToken(e.target.value)}
-                      fullWidth
-                      margin="normal"
-                    />
-                    <TextField
-                      label="Chat ID"
-                      value={chatId}
-                      onChange={(e) => setChatId(e.target.value)}
-                      fullWidth
-                      margin="normal"
-                    />
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                      fullWidth
-                      disabled={updating || !validatePhoneNumber(phoneNumber)}
-                      sx={{ mt: 2 }}
-                    >
-                      {updating ? <CircularProgress size={24} /> : 'Update'}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </>
-          )}
+                <Card sx={{ width: '100%', maxWidth: 600 }}>
+                  <CardContent>
+                    <Typography variant="h5" component="div" gutterBottom>
+                      User Form
+                    </Typography>
+                    <form onSubmit={handlePhoneNumberSubmit}>
+                      <TextField
+                        label="Phone Number"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                        error={!validatePhoneNumber(phoneNumber)}
+                        helperText={!validatePhoneNumber(phoneNumber) ? 'Invalid phone number. Must start with +90 and not begin with 0.' : ''}
+                      />
+                      <TextField
+                        label="Bot Token"
+                        value={botToken}
+                        onChange={(e) => setBotToken(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                      />
+                      <TextField
+                        label="Chat ID"
+                        value={chatId}
+                        onChange={(e) => setChatId(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                      />
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        disabled={updating || !validatePhoneNumber(phoneNumber)}
+                        sx={{ mt: 2 }}
+                      >
+                        {updating ? <CircularProgress size={24} /> : 'Update'}
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </>
+            )}
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            width="50%"
+            p={2}
+          >
+            <Card sx={{ width: '100%', maxWidth: 600 }}>
+              <CardContent>
+                <Typography variant="h5" component="div" gutterBottom>
+                  Instructions
+                </Typography>
+                <Stepper activeStep={-1} orientation="vertical">
+                  {steps.map((label, index) => (
+                    <Step key={index}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+              </CardContent>
+            </Card>
+          </Box>
         </Box>
       </ThemeProvider>
         
