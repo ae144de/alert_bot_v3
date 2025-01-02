@@ -2,7 +2,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme } from '@mui/material';
+import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme, Card, CardContent } from '@mui/material';
 import { ThemeProvider } from "@emotion/react";
 
 const darkTheme = createTheme({
@@ -90,7 +90,7 @@ export default function UserPage(){
       const phoneRegex = /^\+90[1-9]\d{9}$/;
       return phoneRegex.test(number);
     };
-    
+
     return (
       <ThemeProvider theme={darkTheme}>
         <Box
