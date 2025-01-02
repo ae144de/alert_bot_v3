@@ -203,7 +203,7 @@ export default function UserPage(){
             height="100%"
             flexGrow={1}
           >
-            <Card sx={{ width: '100%', maxWidth: 600 }}>
+            <Card sx={{ width: '100%', maxWidth: 600, height: '100%' }}>
               <CardContent>
                 <Typography variant="h5" component="div" gutterBottom>
                   Instructions
