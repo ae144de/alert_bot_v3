@@ -20,7 +20,8 @@
     "next-auth": "^4.24.11",
     "preline": "^2.6.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-number-format": "^5.4.3"
   },
   "devDependencies": {
     "eslint": "^8",
