@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, Autocomplete  } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import NumberFormat from 'react-number-format';
 
 
 
@@ -158,7 +159,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           <MenuItem value="Moving Down %">Moving Down %</MenuItem>
         </Select>
       </FormControl>
-      <TextField
+      {/* <TextField
         label="Value"
         type="number"
         variant="outlined"
@@ -166,6 +167,21 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         required
         value={value}
         onChange={(e) => setValue(e.target.value)}
+      /> */}
+      <NumberFormat
+        label="Value"
+        value={value}
+        onValueChange={(values) => {
+          const { formattedValue, value } = values;
+          setValue(value);
+        }}
+        customInput={TextField}
+        thousandSeparator=","
+        decimalSeparator="."
+        decimalScale={2}
+        fixedDecimalScale
+        prefix="$"
+        fullWidth
       />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
