@@ -2,7 +2,7 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme, Card, CardContent } from '@mui/material';
+import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme, Card, CardContent, GlobalStyles, CssBaseline } from '@mui/material';
 import { ThemeProvider } from "@emotion/react";
 
 const darkTheme = createTheme({
@@ -93,6 +93,8 @@ export default function UserPage(){
 
     return (
       <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <GlobalStyles styles={{ body: { backgroundColor: darkTheme.palette.background.default, color: darkTheme.palette.text.primary } }} />
         <Box
           display="flex"
           flexDirection="column"
@@ -102,6 +104,7 @@ export default function UserPage(){
           bgcolor="background.default"
           color="text.primary"
           p={2}
+          m={0}
         >
           {loading ? (
             <CircularProgress />
