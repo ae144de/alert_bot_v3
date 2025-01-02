@@ -12,10 +12,10 @@ const darkTheme = createTheme({
 });
 
 const steps = [
-  'Sign in to your account',
-  'Enter your phone number, bot token, and chat ID',
-  'Click the Update button to save your information',
-  'Follow the instructions sent to your chat',
+  "Telegram'a giriş yapıp arama kısmından BotFather'ı arayın.BotFather'ı başlattıktan sonra /newbot komutunu gönderin.",
+  "BotFather size bir bot token verecektir. Bu tokeni kopyalayıp aşağıdaki Bot Token kısmına yapıştırın.",
+  "Daha sonra Telegram'da arama kısmına @userinfobot yazarak User Info Bot'u bulun ve başlatın.",
+  "User Info Bot size bir chat ID verecektir. Bu chat ID'yi kopyalayıp aşağıdaki Chat ID kısmına yapıştırın.",
 ];
 
 
