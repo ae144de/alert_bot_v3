@@ -86,6 +86,11 @@ export default function UserPage(){
           )
     }
 
+    const validatePhoneNumber = (number) => {
+      const phoneRegex = /^\+90[1-9]\d{9}$/;
+      return phoneRegex.test(number);
+    };
+    
     return (
       <ThemeProvider theme={darkTheme}>
         <Box
