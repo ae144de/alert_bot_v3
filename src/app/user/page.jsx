@@ -121,7 +121,7 @@ export default function UserPage(){
             // width="50%"
             p={2}
             height="100%"
-            flexGrow={1}
+            // flexGrow={1}
           >
             {loading ? (
               <CircularProgress />
@@ -201,9 +201,10 @@ export default function UserPage(){
             // width="50%"
             p={2}
             height="100%"
-            flexGrow={1}
+            // minHeight="100vh"
+            // flexGrow={1}
           >
-            <Card sx={{ width: '100%', maxWidth: 600, height: '100%' }}>
+            <Card sx={{ width: '100%', maxWidth: 600, minHeight:'100vh' }}>
               <CardContent>
                 <Typography variant="h5" component="div" gutterBottom>
                   Instructions
