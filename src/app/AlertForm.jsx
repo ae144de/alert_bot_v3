@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel } from '@mui/material';
+import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
@@ -122,7 +122,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             <MenuItem key={sym} value={sym}>{sym}</MenuItem>
         ))}
       </Select>
-      <TextField
+      {/* <TextField
         label="Operator"
         variant="outlined"
         fullWidth
@@ -130,7 +130,27 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         value={operator}
         onChange={(e) => setOperator(e.target.value)}
         helperText="Allowed: >, <, >=, <=, =="
-      />
+      /> */}
+      <FormControl fullWidth>
+        <InputLabel id="operator-label">Operator</InputLabel>
+        <Select
+          label="Operator"
+          value={operator}
+          onChange={(e) => setOperator(e.target.value)}
+        >
+          <MenuItem value="Crossing">Crossing</MenuItem>
+          <MenuItem value="Crossing Up">Crossing Up</MenuItem>
+          <MenuItem value="Crossing Down">Crossing Down</MenuItem>
+          <MenuItem value="Greater Than">Greater Than</MenuItem>
+          <MenuItem value="Less Than">Less Than</MenuItem>
+          <MenuItem value="Entering Channel">Entering Channel</MenuItem>
+          <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
+          <MenuItem value="Inside Channel">Inside Channel</MenuItem>
+          <MenuItem value="Outside Channel">Outside Channel</MenuItem>
+          <MenuItem value="Moving Up %">Moving Up %</MenuItem>
+          <MenuItem value="Moving Down %">Moving Down %</MenuItem>
+        </Select>
+      </FormControl>
       <TextField
         label="Value"
         type="number"
