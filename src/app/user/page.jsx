@@ -204,7 +204,7 @@ export default function UserPage(){
             // minHeight="100vh"
             // flexGrow={1}
           >
-            <Card sx={{ width: '100%', maxWidth: 600, minHeight:'100vh' }}>
+            <Card sx={{ width: '100%', maxWidth: 600, height: '100%' }}>
               <CardContent>
                 <Typography variant="h5" component="div" gutterBottom>
                   Instructions
@@ -212,7 +212,15 @@ export default function UserPage(){
                 <Stepper activeStep={-1} orientation="vertical">
                   {steps.map((label, index) => (
                     <Step key={index}>
-                      <StepLabel>{label}</StepLabel>
+                      <StepLabel>
+                        <Typography
+                          variant="body1"
+                          component="div"
+                          sx={{ whiteSpace: 'pre-line', width:'70%' }}
+                        >
+                          {label}
+                        </Typography>
+                      </StepLabel>
                     </Step>
                   ))}
                 </Stepper>
