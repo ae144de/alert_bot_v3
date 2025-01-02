@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, Autocomplete  } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
@@ -112,7 +112,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         value={symbol}
         onChange={(e) => setSymbol(e.target.value)}
       /> */}
-      <Select 
+      {/* <Select 
         labelId='symbol-label'
         label='Symbol'
         value={symbol}
@@ -121,7 +121,14 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         {symbols.map((sym) => (
             <MenuItem key={sym} value={sym}>{sym}</MenuItem>
         ))}
-      </Select>
+      </Select> */}
+      <Autocomplete
+        options={symbols}
+        getOptionLabel={(option) => option}
+        value={symbol}
+        onChange={(event, newValue) => setSymbol(newValue)}
+        renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
+      />
       {/* <TextField
         label="Operator"
         variant="outlined"
