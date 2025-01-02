@@ -120,6 +120,8 @@ export default function UserPage(){
             justifyContent="center"
             // width="50%"
             p={2}
+            height="100%"
+            flexGrow={1}
           >
             {loading ? (
               <CircularProgress />
@@ -198,6 +200,8 @@ export default function UserPage(){
             justifyContent="center"
             // width="50%"
             p={2}
+            height="100%"
+            flexGrow={1}
           >
             <Card sx={{ width: '100%', maxWidth: 600 }}>
               <CardContent>
