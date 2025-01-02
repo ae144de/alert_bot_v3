@@ -2,7 +2,15 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { Button, TextField, Typography, Avatar, CircularProgress, Box } from '@mui/material';
+import { Button, TextField, Typography, Avatar, CircularProgress, Box, createTheme } from '@mui/material';
+import { ThemeProvider } from "@emotion/react";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 
 export default function UserPage(){
     const {data: session, status} = useSession();
@@ -17,6 +25,7 @@ export default function UserPage(){
     const [alertLoading, setAlertLoading] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
 
+    
 
     useEffect(() => {
         if (status === 'authenticated' && session?.user?.email) {
@@ -78,55 +87,137 @@ export default function UserPage(){
     }
 
     return (
-      <>
-        <div>
-          <h1>User Info</h1>
-          <p>Signed in as: {session.user.email}</p>
-          <p>Name: {session.user.name}</p>
-          <p>JWT ACCESS TOKEN: {session.accessToken}</p>
-          {session.user.image && <img src={session.user.image} alt="User Image" style={{ width: 50, height: 50 }} />}
-          {/*  */}
-          <button onClick={() => signOut()}>Sign Out</button>
-        </div>
+      <ThemeProvider theme={darkTheme}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          minHeight="100vh"
+          bgcolor="background.default"
+          color="text.primary"
+          p={2}
+        >
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <>
+              <Card sx={{ mb: 4, width: '100%', maxWidth: 600 }}>
+                <CardContent>
+                  <Typography variant="h5" component="div">
+                    User Info
+                  </Typography>
+                  <Typography variant="body1">
+                    Signed in as: {session.user.email}
+                  </Typography>
+                  <Typography variant="body1">
+                    Name: {session.user.name}
+                  </Typography>
+                  {session.user.image && (
+                    <Avatar
+                      src={session.user.image}
+                      alt="User Image"
+                      sx={{ width: 50, height: 50, mt: 2 }}
+                    />
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card sx={{ width: '100%', maxWidth: 600 }}>
+                <CardContent>
+                  <Typography variant="h5" component="div" gutterBottom>
+                    User Form
+                  </Typography>
+                  <form onSubmit={handlePhoneNumberSubmit}>
+                    <TextField
+                      label="Phone Number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      fullWidth
+                      margin="normal"
+                      error={!validatePhoneNumber(phoneNumber)}
+                      helperText={!validatePhoneNumber(phoneNumber) ? 'Invalid phone number. Must start with +90 and not begin with 0.' : ''}
+                    />
+                    <TextField
+                      label="Bot Token"
+                      value={botToken}
+                      onChange={(e) => setBotToken(e.target.value)}
+                      fullWidth
+                      margin="normal"
+                    />
+                    <TextField
+                      label="Chat ID"
+                      value={chatId}
+                      onChange={(e) => setChatId(e.target.value)}
+                      fullWidth
+                      margin="normal"
+                    />
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                      disabled={updating || !validatePhoneNumber(phoneNumber)}
+                      sx={{ mt: 2 }}
+                    >
+                      {updating ? <CircularProgress size={24} /> : 'Update'}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </>
+          )}
+        </Box>
+      </ThemeProvider>
+        
+     
+        
+        // <div>
+        //   <h1>User Info</h1>
+        //   <p>Signed in as: {session.user.email}</p>
+        //   <p>Name: {session.user.name}</p>
+        //   <p>JWT ACCESS TOKEN: {session.accessToken}</p>
+        //   {session.user.image && <img src={session.user.image} alt="User Image" style={{ width: 50, height: 50 }} />}
+        //   {/*  */}
+        //   <button onClick={() => signOut()}>Sign Out</button>
+        // </div>
 
         
-        <Box component="form" onSubmit={handlePhoneNumberSubmit} sx={{ mb: 4 }}>
-          <Typography variant="h6" gutterBottom>
-            Update Phone Number
-          </Typography>
-          <TextField
-            label="Phone Number"
-            type="tel"
-            fullWidth
-            required
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Bot Token"
-            type="text"
-            fullWidth
-            required
-            value={botToken}
-            onChange={(e) => setBotToken(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <TextField
-            label="Chat ID"
-            type="text"
-            fullWidth
-            required
-            value={chatId}
-            onChange={(e) => setChatId(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <Button type="submit" variant="contained" disabled={updating}>
-            {updating ? 'Updating...' : 'Save Phone Number'}
-          </Button>
-        </Box>
-      </>
-        
+        // <Box component="form" onSubmit={handlePhoneNumberSubmit} sx={{ mb: 4 }}>
+        //   <Typography variant="h6" gutterBottom>
+        //     Update Phone Number
+        //   </Typography>
+        //   <TextField
+        //     label="Phone Number"
+        //     type="tel"
+        //     fullWidth
+        //     required
+        //     value={phoneNumber}
+        //     onChange={(e) => setPhoneNumber(e.target.value)}
+        //     sx={{ mb: 2 }}
+        //   />
+        //   <TextField
+        //     label="Bot Token"
+        //     type="text"
+        //     fullWidth
+        //     required
+        //     value={botToken}
+        //     onChange={(e) => setBotToken(e.target.value)}
+        //     sx={{ mb: 2 }}
+        //   />
+        //   <TextField
+        //     label="Chat ID"
+        //     type="text"
+        //     fullWidth
+        //     required
+        //     value={chatId}
+        //     onChange={(e) => setChatId(e.target.value)}
+        //     sx={{ mb: 2 }}
+        //   />
+        //   <Button type="submit" variant="contained" disabled={updating}>
+        //     {updating ? 'Updating...' : 'Save Phone Number'}
+        //   </Button>
+        // </Box>
     )
       
 }
