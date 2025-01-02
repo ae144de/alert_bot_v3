@@ -106,7 +106,7 @@ export default function UserPage(){
           display="flex"
           flexDirection="row"
           alignItems="center"
-          justifyContent="center"
+          justifyContent="space-around"
           minHeight="100vh"
           bgcolor="background.default"
           color="text.primary"
@@ -118,7 +118,7 @@ export default function UserPage(){
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width="50%"
+            // width="50%"
             p={2}
           >
             {loading ? (
@@ -196,7 +196,7 @@ export default function UserPage(){
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            width="50%"
+            // width="50%"
             p={2}
           >
             <Card sx={{ width: '100%', maxWidth: 600 }}>
