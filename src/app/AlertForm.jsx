@@ -182,10 +182,11 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         //   setValue(value);
         // }}
         // onChange={(e) => setValue(e.target.value)}
-        onValueChange={(values) => {
-          const { formattedValue, value } = values;
-          setValue(value);
-        }}
+        // onValueChange={(values) => {
+        //   const { formattedValue, value } = values;
+        //   setValue(value);
+        // }}
+        onChange={handleChange}
         customInput={TextField}
         thousandSeparator
         decimalSeparator
