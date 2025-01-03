@@ -191,7 +191,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         customInput={TextField}
         thousandSeparator
         decimalSeparator
-        valueIsNumericString
+        // valueIsNumericString
         variant='standard'
         prefix="$"
         fullWidth
