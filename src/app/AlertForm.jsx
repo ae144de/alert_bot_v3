@@ -138,7 +138,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         thousandSeparator= {true}
         decimalSeparator = "."
         valueIsNumericString
-        variant='standard'
+        variant='outlined'
         prefix="$"
         fullWidth
       />
