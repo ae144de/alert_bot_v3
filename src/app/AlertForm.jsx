@@ -81,18 +81,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     }
 
     
-    // You can include `alertType` in your payload if needed
-    // Example:
-    // const response = await fetch('/api/alerts', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ symbol, operator, value: parseFloat(value), type: alertType }),
-    // });
-    // if (response.ok) { 
-    //   onSubmit();
-    //   onClose();
-    // }
-
+   
     onSubmit();
     onClose();
   };
@@ -111,24 +100,6 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2, width: '100%', height:'100%' }}
     >
       <Typography variant="h6">Create New Alert</Typography>
-      {/* <TextField
-        label="Symbol"
-        variant="outlined"
-        fullWidth
-        required
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
-      /> */}
-      {/* <Select 
-        labelId='symbol-label'
-        label='Symbol'
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
-      >
-        {symbols.map((sym) => (
-            <MenuItem key={sym} value={sym}>{sym}</MenuItem>
-        ))}
-      </Select> */}
       <Autocomplete
         options={symbols}
         getOptionLabel={(option) => option}
@@ -136,15 +107,6 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         onChange={(event, newValue) => setSymbol(newValue)}
         renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
       />
-      {/* <TextField
-        label="Operator"
-        variant="outlined"
-        fullWidth
-        required
-        value={operator}
-        onChange={(e) => setOperator(e.target.value)}
-        helperText="Allowed: >, <, >=, <=, =="
-      /> */}
       <FormControl fullWidth>
         <InputLabel id="operator-label">Operator</InputLabel>
         <Select
@@ -165,38 +127,17 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           <MenuItem value="Moving Down %">Moving Down %</MenuItem>
         </Select>
       </FormControl>
-      {/* <TextField
-        label="Value"
-        type="number"
-        variant="outlined"
-        fullWidth
-        required
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      /> */}
       <NumericFormat
         label="Value"
         value={value}
-        // onValueChange={(values) => {
-        //   const { formattedValue, value } = values;
-        //   setValue(value);
-        // }}
-        // onChange={(e) => setValue(e.target.value)}
-        // onValueChange={(values) => {
-        //   const { formattedValue, value } = values;
-        //   setValue(value);
-        // }}
-        // onChange={handleChange}
-        // onChange={(e) => setValue(e.target.value)}
+        
         onValueChange={(values) => {
-          // values has { floatValue, formattedValue, value }
           setValue(values.value);  // store numeric value as a string
         }}
-        
         customInput={TextField}
         thousandSeparator
         decimalSeparator
-        // valueIsNumericString
+        valueIsNumericString
         variant='standard'
         prefix="$"
         fullWidth
