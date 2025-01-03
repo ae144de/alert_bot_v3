@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, Autocomplete  } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import NumberFormat from 'react-number-format';
+import {NumericFormat} from 'react-number-format';
 
 
 
@@ -168,18 +168,19 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       /> */}
-      <NumberFormat
+      <NumericFormat
         label="Value"
         value={value}
-        onValueChange={(values) => {
-          const { formattedValue, value } = values;
-          setValue(value);
-        }}
+        // onValueChange={(values) => {
+        //   const { formattedValue, value } = values;
+        //   setValue(value);
+        // }}
+        onChange={(e) => setValue(e.target.value)}
         customInput={TextField}
-        thousandSeparator=","
-        decimalSeparator="."
-        decimalScale={2}
-        fixedDecimalScale
+        thousandSeparator
+        decimalSeparator
+        valueIsNumericString
+        variant='standard'
         prefix="$"
         fullWidth
       />
