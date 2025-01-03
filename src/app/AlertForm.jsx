@@ -97,6 +97,12 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     onClose();
   };
 
+  const handleChange = (event) => {
+    setValue({
+      ...value,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   return (
     <Box 
