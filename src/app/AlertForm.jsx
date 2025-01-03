@@ -187,7 +187,12 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         //   setValue(value);
         // }}
         // onChange={handleChange}
-        onChange={(e) => setValue(e.target.value)}
+        // onChange={(e) => setValue(e.target.value)}
+        onValueChange={(values) => {
+          // values has { floatValue, formattedValue, value }
+          setValue(values.value);  // store numeric value as a string
+        }}
+        
         customInput={TextField}
         thousandSeparator
         decimalSeparator
