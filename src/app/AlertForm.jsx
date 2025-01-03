@@ -174,7 +174,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       /> */}
-      {/* <NumericFormat
+      <NumericFormat
         label="Value"
         value={value}
         // onValueChange={(values) => {
@@ -186,7 +186,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         //   const { formattedValue, value } = values;
         //   setValue(value);
         // }}
-        onChange={handleChange}
+        // onChange={handleChange}
+        onChange={(e) => setValue(e.target.value)}
         customInput={TextField}
         thousandSeparator
         decimalSeparator
@@ -194,7 +195,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         variant='standard'
         prefix="$"
         fullWidth
-      /> */}
+      />
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
         <Button type="button" onClick={onClose}>Cancel</Button>
