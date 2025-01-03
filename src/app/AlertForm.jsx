@@ -135,8 +135,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           setValue(values.value);  // store numeric value as a string
         }}
         customInput={TextField}
-        thousandSeparator
-        decimalSeparator
+        thousandSeparator= {true}
+        decimalSeparator = "."
         valueIsNumericString
         variant='standard'
         prefix="$"
