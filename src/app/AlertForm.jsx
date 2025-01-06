@@ -24,6 +24,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [lowerBound, setLowerBound] = useState('');
   const [trigger, setTrigger] = useState('Only Once');
   const [expiration, setExpiration] = useState(null);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [message, setMessage] = useState('');
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
 
@@ -296,7 +298,38 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         </Grid>
       </Grid>
       <Divider />
+      
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Alert Title</Typography>
+        </Grid>
+        <Grid item xs={9}>
+          <TextField
+            label="Alert Title"
+            value={alertTitle}
+            onChange={(e) => setAlertTitle(e.target.value)}
+            variant="outlined"
+            fullWidth
+          />
+        </Grid>
+      </Grid>
 
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Message</Typography>
+        </Grid>
+        <Grid item xs={9}>
+          <TextField
+            label="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+          />
+        </Grid>
+      </Grid>
       
       
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
