@@ -117,32 +117,38 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2, width: '100%', height:'100%' }}
     >
       <Typography variant="h6">Create New Alert</Typography>
-      <Autocomplete
-        options={symbols}
-        getOptionLabel={(option) => option}
-        value={symbol}
-        onChange={(event, newValue) => setSymbol(newValue)}
-        renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
-      />
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Typography variant="subtitle1">Symbols</Typography>
+        <Autocomplete
+          options={symbols}
+          getOptionLabel={(option) => option}
+          value={symbol}
+          onChange={(event, newValue) => setSymbol(newValue)}
+          renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
+        />
+      </Box>
       <FormControl fullWidth>
-        <InputLabel id="operator-label">Operator</InputLabel>
-        <Select
-          label="Operator"
-          value={operator}
-          onChange={(e) => setOperator(e.target.value)}
-        >
-          <MenuItem value="Crossing">Crossing</MenuItem>
-          <MenuItem value="Crossing Up">Crossing Up</MenuItem>
-          <MenuItem value="Crossing Down">Crossing Down</MenuItem>
-          <MenuItem value="Greater Than">Greater Than</MenuItem>
-          <MenuItem value="Less Than">Less Than</MenuItem>
-          <MenuItem value="Entering Channel">Entering Channel</MenuItem>
-          <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
-          <MenuItem value="Inside Channel">Inside Channel</MenuItem>
-          <MenuItem value="Outside Channel">Outside Channel</MenuItem>
-          <MenuItem value="Moving Up %">Moving Up %</MenuItem>
-          <MenuItem value="Moving Down %">Moving Down %</MenuItem>
-        </Select>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          {/* <InputLabel id="operator-label">Operator</InputLabel> */}
+          <Typography variant="subtitle1">Condition</Typography>
+          <Select
+            label="Operator"
+            value={operator}
+            onChange={(e) => setOperator(e.target.value)}
+          >
+            <MenuItem value="Crossing">Crossing</MenuItem>
+            <MenuItem value="Crossing Up">Crossing Up</MenuItem>
+            <MenuItem value="Crossing Down">Crossing Down</MenuItem>
+            <MenuItem value="Greater Than">Greater Than</MenuItem>
+            <MenuItem value="Less Than">Less Than</MenuItem>
+            <MenuItem value="Entering Channel">Entering Channel</MenuItem>
+            <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
+            <MenuItem value="Inside Channel">Inside Channel</MenuItem>
+            <MenuItem value="Outside Channel">Outside Channel</MenuItem>
+            <MenuItem value="Moving Up %">Moving Up %</MenuItem>
+            <MenuItem value="Moving Down %">Moving Down %</MenuItem>
+          </Select>
+        </Box>
       </FormControl>
       {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
         <>
@@ -211,25 +217,27 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       )}
       <Divider />
       <FormControl fullWidth>
-        <Typography variant="subtitle1">Trigger</Typography>
-        <ToggleButtonGroup
-          value={trigger}
-          exclusive
-          onChange={handleTriggerChange}
-          aria-label="trigger"
-        >
-          <ToggleButton value="Only Once" aria-label="only once">
-            Only Once
-          </ToggleButton>
-          <ToggleButton value="Every Time" aria-label="every time">
-            Every Time
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Typography variant="body2" sx={{ mt: 1 }}>
-          {trigger === 'Only Once'
-            ? 'The alert will trigger only once and will not be repeated'
-            : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Typography variant="subtitle1">Trigger</Typography>
+          <ToggleButtonGroup
+            value={trigger}
+            exclusive
+            onChange={handleTriggerChange}
+            aria-label="trigger"
+          >
+            <ToggleButton value="Only Once" aria-label="only once">
+              Only Once
+            </ToggleButton>
+            <ToggleButton value="Every Time" aria-label="every time">
+              Every Time
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            {trigger === 'Only Once'
+              ? 'The alert will trigger only once and will not be repeated'
+              : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
+          </Typography>
+        </Box>
       </FormControl>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
