@@ -271,10 +271,10 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             aria-label="trigger"
             fullWidth
           >
-            <ToggleButton value="Only Once" aria-label="only once">
+            <ToggleButton value="Only Once" aria-label="only once" sx={{ padding: '10px 20px' }}>
               Only Once
             </ToggleButton>
-            <ToggleButton value="Every Time" aria-label="every time">
+            <ToggleButton value="Every Time" aria-label="every time" sx={{ padding: '10px 20px' }}>
               Every Time
             </ToggleButton>
           </ToggleButtonGroup>
@@ -298,7 +298,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         </Grid>
       </Grid>
       <Divider />
-      
+
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={3}>
           <Typography variant="subtitle1">Alert Title</Typography>
