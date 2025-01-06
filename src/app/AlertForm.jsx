@@ -75,10 +75,17 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         body: JSON.stringify({
           selectedSymbol:symbol, 
           operator:operator, 
-          value: parseFloat(value), 
+          value: parseFloat(value),
+          upperBound: parseFloat(upperBound),
+          lowerBound: parseFloat(lowerBound),
+          trigger: trigger,
+          expiration: expiration,
+          alertTitle: alertTitle,
+          message: message, 
           type: alertType, 
           created_at: getFormattedCurrentDate(), 
-          status: 'Active'})
+          status: 'Active'
+        })
       });
   
       if (response.ok){
@@ -342,7 +349,9 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
         <Button type="button" onClick={onClose}>Cancel</Button>
-        <Button type="submit" variant="contained">Create</Button>
+        <Button type="submit" variant="contained" disabled={loading}>
+          {loading ? 'Creating...' : 'Create'}
+        </Button>
       </Box>
     </Box>
   );
