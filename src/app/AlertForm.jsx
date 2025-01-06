@@ -72,7 +72,13 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           'Authorization': `Bearer ${session?.myCustomToken}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({selectedSymbol:symbol, operator:operator, value: parseFloat(value), type: alertType, created_at: getFormattedCurrentDate(), status: 'Active'})
+        body: JSON.stringify({
+          selectedSymbol:symbol, 
+          operator:operator, 
+          value: parseFloat(value), 
+          type: alertType, 
+          created_at: getFormattedCurrentDate(), 
+          status: 'Active'})
       });
   
       if (response.ok){
@@ -126,7 +132,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       onSubmit={handleSubmit}
       sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2, width: '100%', height:'100%' }}
     >
-      <Typography variant="h6">Create New Alert</Typography>
+      <Typography variant="h6" component='div' sx={{mb:2}}>Create New Alert</Typography>
       
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={3}>
