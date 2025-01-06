@@ -270,11 +270,12 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             onChange={handleTriggerChange}
             aria-label="trigger"
             fullWidth
+            sx={{border:'#ffffff1f', padding:'6px'}}
           >
-            <ToggleButton value="Only Once" aria-label="only once" sx={{ padding: '10px 20px' }}>
+            <ToggleButton value="Only Once" aria-label="only once" >
               Only Once
             </ToggleButton>
-            <ToggleButton value="Every Time" aria-label="every time" sx={{ padding: '10px 20px' }}>
+            <ToggleButton value="Every Time" aria-label="every time" >
               Every Time
             </ToggleButton>
           </ToggleButtonGroup>
