@@ -16,6 +16,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const {data: session, status} = useSession();
+  const [upperBound, setUpperBound] = useState('');
+  const [lowerBound, setLowerBound] = useState('');
   
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
@@ -93,6 +95,14 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     });
   };
 
+  const handleUpperBoundChange = (event) => {
+    setUpperBound(event.target.value);
+  };
+
+  const handleLowerBoundChange = (event) => {
+    setLowerBound(event.target.value);
+  };
+
   return (
     <Box 
       component="form"
@@ -127,21 +137,41 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           <MenuItem value="Moving Down %">Moving Down %</MenuItem>
         </Select>
       </FormControl>
-      <NumericFormat
-        label="Value"
-        value={value}
-        
-        onValueChange={(values) => {
-          setValue(values.value);  // store numeric value as a string
-        }}
-        customInput={TextField}
-        thousandSeparator= {true}
-        decimalSeparator = "."
-        valueIsNumericString
-        variant='outlined'
-        prefix="$"
-        fullWidth
-      />
+      {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
+        <>
+          <TextField
+            label="Upper Bound"
+            value={upperBound}
+            onChange={handleUpperBoundChange}
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            label="Lower Bound"
+            value={lowerBound}
+            onChange={handleLowerBoundChange}
+            variant="outlined"
+            fullWidth
+          />
+        </>
+      ) : (
+        <NumericFormat
+          label="Value"
+          value={value}
+          
+          onValueChange={(values) => {
+            setValue(values.value);  // store numeric value as a string
+          }}
+          customInput={TextField}
+          thousandSeparator= {true}
+          decimalSeparator = "."
+          valueIsNumericString
+          variant='outlined'
+          prefix="$"
+          fullWidth
+        />
+      )}
+      
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
         <Button type="button" onClick={onClose}>Cancel</Button>
