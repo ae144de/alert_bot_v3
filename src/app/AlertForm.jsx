@@ -139,27 +139,50 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       </FormControl>
       {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
         <>
-          <TextField
+          <NumericFormat
             label="Upper Bound"
             value={upperBound}
-            onChange={handleUpperBoundChange}
-            variant="outlined"
+            // onChange={handleUpperBoundChange}
+            onValueChange={(values) => {
+              setUpperBound(values.upperBound);  // store numeric value as a string
+            }}
+            customInput={TextField}
+            thousandSeparator= {true}
+            decimalSeparator = "."
+            valueIsNumericString
+            variant='outlined'
+            prefix="$"
             fullWidth
           />
-          <TextField
+          <NumericFormat
             label="Lower Bound"
             value={lowerBound}
-            onChange={handleLowerBoundChange}
-            variant="outlined"
+            onValueChange={(values) => {
+              setLowerBound(values.lowerBound);  // store numeric value as a string
+            }}
+            customInput={TextField}
+            thousandSeparator= {true}
+            decimalSeparator = "."
+            valueIsNumericString
+            variant='outlined'
+            prefix="$"
             fullWidth
           />
         </>
       ) : operator === 'Moving Up %' || operator === 'Moving Down %' ? (
-        <TextField
+        <NumericFormat
           label="Value %"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
-          variant="outlined"
+          
+          onValueChange={(values) => {
+            setValue(values.value);  // store numeric value as a string
+          }}
+          customInput={TextField}
+          thousandSeparator= {true}
+          decimalSeparator = "."
+          valueIsNumericString
+          variant='outlined'
+          prefix="$"
           fullWidth
         />
       ) : (
