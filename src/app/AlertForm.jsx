@@ -5,7 +5,10 @@ import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormC
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import {NumericFormat} from 'react-number-format';
-import { DateTimePicker } from '@mui/lab';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 
@@ -114,7 +117,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const handleExpirationChange = (newValue) => {
     setExpiration(newValue);
   };
-  
+
   return (
     <Box 
       component="form"
@@ -285,12 +288,11 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           <Typography variant="subtitle1">Expiration</Typography>
         </Grid>
         <Grid item xs={9}>
-          <DateTimePicker
-            label="Expiration"
-            value={expiration}
-            onChange={handleExpirationChange}
-            renderInput={(params) => <TextField {...params} fullWidth />}
-          />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['DateTimePicker']}>
+            <DateTimePicker label="Basic date time picker" />
+          </DemoContainer>
+        </LocalizationProvider>
         </Grid>
       </Grid>
       <Divider />
