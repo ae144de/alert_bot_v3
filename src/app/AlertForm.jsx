@@ -128,7 +128,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         />
       </Box>
       <FormControl fullWidth>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center'}}>
           {/* <InputLabel id="operator-label">Operator</InputLabel> */}
           <Typography variant="subtitle1">Condition</Typography>
           <Select
