@@ -20,7 +20,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [upperBound, setUpperBound] = useState('');
   const [lowerBound, setLowerBound] = useState('');
   const [trigger, setTrigger] = useState('Only Once');
-  
+  const [expiration, setExpiration] = useState(null);
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
 
@@ -111,6 +111,10 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     }
   };
 
+  const handleExpirationChange = (newValue) => {
+    setExpiration(newValue);
+  };
+  
   return (
     <Box 
       component="form"
