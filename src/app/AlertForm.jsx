@@ -125,6 +125,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           value={symbol}
           onChange={(event, newValue) => setSymbol(newValue)}
           renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
+          sx={{ width: '100%' }}
         />
       </Box>
       <FormControl fullWidth>
@@ -135,6 +136,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             label="Operator"
             value={operator}
             onChange={(e) => setOperator(e.target.value)}
+            sx={{ width: '100%' }}
           >
             <MenuItem value="Crossing">Crossing</MenuItem>
             <MenuItem value="Crossing Up">Crossing Up</MenuItem>
@@ -148,9 +150,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             <MenuItem value="Moving Up %">Moving Up %</MenuItem>
             <MenuItem value="Moving Down %">Moving Down %</MenuItem>
           </Select>
-        </Box>
-      </FormControl>
-      {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
+        
+        {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
         <>
           <NumericFormat
             label="Upper Bound"
@@ -215,6 +216,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           fullWidth
         />
       )}
+      </Box>
+      </FormControl>
       <Divider />
       <FormControl fullWidth>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -224,6 +227,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             exclusive
             onChange={handleTriggerChange}
             aria-label="trigger"
+            sx={{ width: '100%' }}
           >
             <ToggleButton value="Only Once" aria-label="only once">
               Only Once
@@ -232,7 +236,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
               Every Time
             </ToggleButton>
           </ToggleButtonGroup>
-          <Typography variant="body2" sx={{ mt: 1 }}>
+          <Typography variant="body2" component='div' sx={{ mt: 1, width:'100%' }}>
             {trigger === 'Only Once'
               ? 'The alert will trigger only once and will not be repeated'
               : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
