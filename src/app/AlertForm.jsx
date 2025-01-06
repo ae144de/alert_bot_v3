@@ -117,142 +117,164 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 2, width: '100%', height:'100%' }}
     >
       <Typography variant="h6">Create New Alert</Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Typography variant="subtitle1">Symbols</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Symbol</Typography>
+        </Grid>
+        <Grid item xs={9}>
           <Autocomplete
             options={symbols}
             getOptionLabel={(option) => option}
             value={symbol}
             onChange={(event, newValue) => setSymbol(newValue)}
             renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
-            sx={{ width: '100%' }}
           />
-        </Box>
-      </Box>
-
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Typography variant="subtitle1">Condition</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-          <FormControl fullWidth>
-            <Box sx={{ display: 'flex', alignItems: 'center'}}>
-              {/* <InputLabel id="operator-label">Operator</InputLabel> */}
-              <Select
-                label="Operator"
-                value={operator}
-                onChange={(e) => setOperator(e.target.value)}
-                sx={{ width: '100%' }}
-              >
-                <MenuItem value="Crossing">Crossing</MenuItem>
-                <MenuItem value="Crossing Up">Crossing Up</MenuItem>
-                <MenuItem value="Crossing Down">Crossing Down</MenuItem>
-                <MenuItem value="Greater Than">Greater Than</MenuItem>
-                <MenuItem value="Less Than">Less Than</MenuItem>
-                <MenuItem value="Entering Channel">Entering Channel</MenuItem>
-                <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
-                <MenuItem value="Inside Channel">Inside Channel</MenuItem>
-                <MenuItem value="Outside Channel">Outside Channel</MenuItem>
-                <MenuItem value="Moving Up %">Moving Up %</MenuItem>
-                <MenuItem value="Moving Down %">Moving Down %</MenuItem>
-              </Select>
-            </Box>
-          </FormControl>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
       
-        
-        {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Condition</Typography>
+        </Grid>
+        <Grid item xs={9}>
+          <FormControl fullWidth>
+            <InputLabel id="operator-label">Operator</InputLabel>
+            <Select
+              label="Operator"
+              value={operator}
+              onChange={(e) => setOperator(e.target.value)}
+            >
+              <MenuItem value="Crossing">Crossing</MenuItem>
+              <MenuItem value="Crossing Up">Crossing Up</MenuItem>
+              <MenuItem value="Crossing Down">Crossing Down</MenuItem>
+              <MenuItem value="Greater Than">Greater Than</MenuItem>
+              <MenuItem value="Less Than">Less Than</MenuItem>
+              <MenuItem value="Entering Channel">Entering Channel</MenuItem>
+              <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
+              <MenuItem value="Inside Channel">Inside Channel</MenuItem>
+              <MenuItem value="Outside Channel">Outside Channel</MenuItem>
+              <MenuItem value="Moving Up %">Moving Up %</MenuItem>
+              <MenuItem value="Moving Down %">Moving Down %</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+      
+      {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
         <>
-          <NumericFormat
-            label="Upper Bound"
-            value={upperBound}
-            // onChange={handleUpperBoundChange}
-            onValueChange={(values) => {
-              setUpperBound(values.upperBound);  // store numeric value as a string
-            }}
-            customInput={TextField}
-            thousandSeparator= {true}
-            decimalSeparator = "."
-            valueIsNumericString
-            variant='outlined'
-            prefix="$"
-            fullWidth
-          />
-          <NumericFormat
-            label="Lower Bound"
-            value={lowerBound}
-            onValueChange={(values) => {
-              setLowerBound(values.lowerBound);  // store numeric value as a string
-            }}
-            customInput={TextField}
-            thousandSeparator= {true}
-            decimalSeparator = "."
-            valueIsNumericString
-            variant='outlined'
-            prefix="$"
-            fullWidth
-          />
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={3}>
+              <Typography variant="subtitle1">Upper Bound</Typography>
+            </Grid>
+            <Grid item xs={9}>
+              <NumericFormat
+                value={upperBound}
+                onValueChange={(values) => {
+                  setUpperBound(values.value);  // store numeric value as a string
+                }}
+                customInput={TextField}
+                thousandSeparator={true}
+                decimalSeparator="."
+                valueIsNumericString
+                variant="outlined"
+                prefix="$"
+                fullWidth
+              />
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={3}>
+              <Typography variant="subtitle1">Lower Bound</Typography>
+            </Grid>
+            <Grid item xs={9}>
+              <NumericFormat
+                value={lowerBound}
+                onValueChange={(values) => {
+                  setLowerBound(values.value);  // store numeric value as a string
+                }}
+                customInput={TextField}
+                thousandSeparator={true}
+                decimalSeparator="."
+                valueIsNumericString
+                variant="outlined"
+                prefix="$"
+                fullWidth
+              />
+            </Grid>
+          </Grid>
         </>
       ) : operator === 'Moving Up %' || operator === 'Moving Down %' ? (
-        <NumericFormat
-          label="Value %"
-          value={value}
-          
-          onValueChange={(values) => {
-            setValue(values.value);  // store numeric value as a string
-          }}
-          customInput={TextField}
-          thousandSeparator= {true}
-          decimalSeparator = "."
-          valueIsNumericString
-          variant='outlined'
-          prefix="$"
-          fullWidth
-        />
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={3}>
+            <Typography variant="subtitle1">Value %</Typography>
+          </Grid>
+          <Grid item xs={9}>
+            <NumericFormat
+              value={value}
+              onValueChange={(values) => {
+                setValue(values.value);  // store numeric value as a string
+              }}
+              customInput={TextField}
+              thousandSeparator={true}
+              decimalSeparator="."
+              valueIsNumericString
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+        </Grid>
       ) : (
-        <NumericFormat
-          label="Value"
-          value={value}
-          
-          onValueChange={(values) => {
-            setValue(values.value);  // store numeric value as a string
-          }}
-          customInput={TextField}
-          thousandSeparator= {true}
-          decimalSeparator = "."
-          valueIsNumericString
-          variant='outlined'
-          prefix="$"
-          fullWidth
-        />
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={3}>
+            <Typography variant="subtitle1">Value</Typography>
+          </Grid>
+          <Grid item xs={9}>
+            <NumericFormat
+              value={value}
+              onValueChange={(values) => {
+                setValue(values.value);  // store numeric value as a string
+              }}
+              customInput={TextField}
+              thousandSeparator={true}
+              decimalSeparator="."
+              valueIsNumericString
+              variant="outlined"
+              prefix="$"
+              fullWidth
+            />
+          </Grid>
+        </Grid>
       )}
-
+      
       <Divider />
-
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-      <Typography variant="subtitle1">Trigger</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Trigger</Typography>
+        </Grid>
+        <Grid item xs={9}>
           <ToggleButtonGroup
-              value={trigger}
-              exclusive
-              onChange={handleTriggerChange}
-              aria-label="trigger"
-              sx={{ width: '100%' }}
-            >
-              <ToggleButton value="Only Once" aria-label="only once">
-                Only Once
-              </ToggleButton>
-              <ToggleButton value="Every Time" aria-label="every time">
-                Every Time
-              </ToggleButton>
-            </ToggleButtonGroup>
-            <Typography variant="body2" component='div' sx={{ mt: 1, width:'100%' }}>
-              {trigger === 'Only Once'
-                ? 'The alert will trigger only once and will not be repeated'
-                : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
-            </Typography>
-        </Box>
-      </Box>
+            value={trigger}
+            exclusive
+            onChange={handleTriggerChange}
+            aria-label="trigger"
+            fullWidth
+          >
+            <ToggleButton value="Only Once" aria-label="only once">
+              Only Once
+            </ToggleButton>
+            <ToggleButton value="Every Time" aria-label="every time">
+              Every Time
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            {trigger === 'Only Once'
+              ? 'The alert will trigger only once and will not be repeated'
+              : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
+          </Typography>
+        </Grid>
+      </Grid>
       
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
