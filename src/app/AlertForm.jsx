@@ -154,6 +154,14 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
             fullWidth
           />
         </>
+      ) : operator === 'Moving Up %' || operator === 'Moving Down %' ? (
+        <TextField
+          label="Value %"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
       ) : (
         <NumericFormat
           label="Value"
