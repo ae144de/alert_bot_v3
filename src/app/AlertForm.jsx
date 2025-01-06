@@ -5,6 +5,7 @@ import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormC
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import {NumericFormat} from 'react-number-format';
+import { DateTimePicker } from '@mui/lab';
 
 
 
@@ -275,6 +276,22 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           </Typography>
         </Grid>
       </Grid>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={3}>
+          <Typography variant="subtitle1">Expiration</Typography>
+        </Grid>
+        <Grid item xs={9}>
+          <DateTimePicker
+            label="Expiration"
+            value={expiration}
+            onChange={handleExpirationChange}
+            renderInput={(params) => <TextField {...params} fullWidth />}
+          />
+        </Grid>
+      </Grid>
+      <Divider />
+
+      
       
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
