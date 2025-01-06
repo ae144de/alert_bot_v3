@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, Autocomplete  } from '@mui/material';
+import { Box, TextField, Button, Typography, MenuItem, Select, InputLabel, FormControl, Autocomplete, Divider, ToggleButton, ToggleButtonGroup  } from '@mui/material';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import {NumericFormat} from 'react-number-format';
@@ -18,6 +18,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const {data: session, status} = useSession();
   const [upperBound, setUpperBound] = useState('');
   const [lowerBound, setLowerBound] = useState('');
+  const [trigger, setTrigger] = useState('Only Once');
   
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
@@ -101,6 +102,12 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
 
   const handleLowerBoundChange = (event) => {
     setLowerBound(event.target.value);
+  };
+
+  const handleTriggerChange = (event, newTrigger) => {
+    if (newTrigger !== null) {
+      setTrigger(newTrigger);
+    }
   };
 
   return (
@@ -202,7 +209,28 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           fullWidth
         />
       )}
-      
+      <Divider />
+      <FormControl fullWidth>
+        <Typography variant="subtitle1">Trigger</Typography>
+        <ToggleButtonGroup
+          value={trigger}
+          exclusive
+          onChange={handleTriggerChange}
+          aria-label="trigger"
+        >
+          <ToggleButton value="Only Once" aria-label="only once">
+            Only Once
+          </ToggleButton>
+          <ToggleButton value="Every Time" aria-label="every time">
+            Every Time
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <Typography variant="body2" sx={{ mt: 1 }}>
+          {trigger === 'Only Once'
+            ? 'The alert will trigger only once and will not be repeated'
+            : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
+        </Typography>
+      </FormControl>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
         <Button type="button" onClick={onClose}>Cancel</Button>
