@@ -119,37 +119,47 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
       <Typography variant="h6">Create New Alert</Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Typography variant="subtitle1">Symbols</Typography>
-        <Autocomplete
-          options={symbols}
-          getOptionLabel={(option) => option}
-          value={symbol}
-          onChange={(event, newValue) => setSymbol(newValue)}
-          renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
-          sx={{ width: '100%' }}
-        />
-      </Box>
-      <FormControl fullWidth>
-        <Box sx={{ display: 'flex', alignItems: 'center'}}>
-          {/* <InputLabel id="operator-label">Operator</InputLabel> */}
-          <Typography variant="subtitle1">Condition</Typography>
-          <Select
-            label="Operator"
-            value={operator}
-            onChange={(e) => setOperator(e.target.value)}
+        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <Autocomplete
+            options={symbols}
+            getOptionLabel={(option) => option}
+            value={symbol}
+            onChange={(event, newValue) => setSymbol(newValue)}
+            renderInput={(params) => <TextField {...params} label="Symbol" variant="outlined" fullWidth />}
             sx={{ width: '100%' }}
-          >
-            <MenuItem value="Crossing">Crossing</MenuItem>
-            <MenuItem value="Crossing Up">Crossing Up</MenuItem>
-            <MenuItem value="Crossing Down">Crossing Down</MenuItem>
-            <MenuItem value="Greater Than">Greater Than</MenuItem>
-            <MenuItem value="Less Than">Less Than</MenuItem>
-            <MenuItem value="Entering Channel">Entering Channel</MenuItem>
-            <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
-            <MenuItem value="Inside Channel">Inside Channel</MenuItem>
-            <MenuItem value="Outside Channel">Outside Channel</MenuItem>
-            <MenuItem value="Moving Up %">Moving Up %</MenuItem>
-            <MenuItem value="Moving Down %">Moving Down %</MenuItem>
-          </Select>
+          />
+        </Box>
+      </Box>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Typography variant="subtitle1">Condition</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+          <FormControl fullWidth>
+            <Box sx={{ display: 'flex', alignItems: 'center'}}>
+              {/* <InputLabel id="operator-label">Operator</InputLabel> */}
+              <Select
+                label="Operator"
+                value={operator}
+                onChange={(e) => setOperator(e.target.value)}
+                sx={{ width: '100%' }}
+              >
+                <MenuItem value="Crossing">Crossing</MenuItem>
+                <MenuItem value="Crossing Up">Crossing Up</MenuItem>
+                <MenuItem value="Crossing Down">Crossing Down</MenuItem>
+                <MenuItem value="Greater Than">Greater Than</MenuItem>
+                <MenuItem value="Less Than">Less Than</MenuItem>
+                <MenuItem value="Entering Channel">Entering Channel</MenuItem>
+                <MenuItem value="Exiting Channel">Exiting Channel</MenuItem>
+                <MenuItem value="Inside Channel">Inside Channel</MenuItem>
+                <MenuItem value="Outside Channel">Outside Channel</MenuItem>
+                <MenuItem value="Moving Up %">Moving Up %</MenuItem>
+                <MenuItem value="Moving Down %">Moving Down %</MenuItem>
+              </Select>
+            </Box>
+          </FormControl>
+        </Box>
+      </Box>
+      
         
         {operator === 'Entering Channel' || operator === 'Exiting Channel' || operator === 'Inside Channel' || operator === 'Outside Channel' ? (
         <>
@@ -216,33 +226,34 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           fullWidth
         />
       )}
-      </Box>
-      </FormControl>
+
       <Divider />
-      <FormControl fullWidth>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Typography variant="subtitle1">Trigger</Typography>
+
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Typography variant="subtitle1">Trigger</Typography>
+        <Box sx={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
           <ToggleButtonGroup
-            value={trigger}
-            exclusive
-            onChange={handleTriggerChange}
-            aria-label="trigger"
-            sx={{ width: '100%' }}
-          >
-            <ToggleButton value="Only Once" aria-label="only once">
-              Only Once
-            </ToggleButton>
-            <ToggleButton value="Every Time" aria-label="every time">
-              Every Time
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <Typography variant="body2" component='div' sx={{ mt: 1, width:'100%' }}>
-            {trigger === 'Only Once'
-              ? 'The alert will trigger only once and will not be repeated'
-              : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
-          </Typography>
+              value={trigger}
+              exclusive
+              onChange={handleTriggerChange}
+              aria-label="trigger"
+              sx={{ width: '100%' }}
+            >
+              <ToggleButton value="Only Once" aria-label="only once">
+                Only Once
+              </ToggleButton>
+              <ToggleButton value="Every Time" aria-label="every time">
+                Every Time
+              </ToggleButton>
+            </ToggleButtonGroup>
+            <Typography variant="body2" component='div' sx={{ mt: 1, width:'100%' }}>
+              {trigger === 'Only Once'
+                ? 'The alert will trigger only once and will not be repeated'
+                : 'The alert will trigger every time the condition is met, but not more than 1 time per minute'}
+            </Typography>
         </Box>
-      </FormControl>
+      </Box>
+      
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
         <Button type="button" variant="text" onClick={onBack}>Back</Button>
         <Button type="button" onClick={onClose}>Cancel</Button>
