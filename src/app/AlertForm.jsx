@@ -130,7 +130,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   };
 
   const handleExpirationChange = (newValue) => {
-    setExpiration(newValue);
+    setExpiration(newValue.toDate());
   };
 
   return (
