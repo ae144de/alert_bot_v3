@@ -14,7 +14,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [symbol, setSymbol] = useState('BTCUSDT');
-  const [operator, setOperator] = useState('>');
+  const [operator, setOperator] = useState('Crossing');
   const [value, setValue] = useState('');
   const [symbols, setSymbols] = useState([]);
   const [loading, setLoading] = useState(false);
