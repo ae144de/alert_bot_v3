@@ -310,6 +310,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
               label="Basic date time picker" 
               value={expiration}
               onChange={handleExpirationChange}
+              renderInput={(params) => <TextField {...params} fullWidth />}
             />
           </DemoContainer>
         </LocalizationProvider>
