@@ -131,7 +131,8 @@ export default function AlertTable() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Alert</TableCell>
+              <TableCell>Alert ID</TableCell>
+              <TableCell>Title</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Created At</TableCell>
@@ -141,7 +142,8 @@ export default function AlertTable() {
           <TableBody>
             {alerts.map((alert) => (
               <TableRow key={alert.id}>
-                <TableCell>{alert.alert_id}</TableCell>
+                <TableCell>{alert.alertTitle}</TableCell>
+                <TableCell>{alert.title}</TableCell>
                 <TableCell>{alert.type}</TableCell>
                 <TableCell>
                   {alert.status === "Active" ? (
@@ -220,7 +222,9 @@ export default function AlertTable() {
               <Typography component='div' variant="h6" gutterBottom>Alert Information</Typography>
 
               <Divider sx={{ mb:1, mt:1 }}/>
-              <Typography component='div'><strong>Alert:</strong> {selectedAlert.id}</Typography>
+              <Typography component='div'><strong>Alert:</strong> {selectedAlert.alert_id}</Typography>
+              <Divider sx={{ mb:1, mt:1 }}/>
+              <Typography component='div'><strong>Title:</strong> {selectedAlert.alertTitle}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Type:</strong> {selectedAlert.type}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
@@ -230,8 +234,21 @@ export default function AlertTable() {
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Operator</strong> {selectedAlert.operator}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
-              <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
-              <Divider sx={{ mb:1, mt:1 }}/>
+              {alert.lowerBound && alert.upperBound ? (
+                <>
+                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Divider sx={{ mb:1, mt:1 }}/>
+                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Divider sx={{ mb:1, mt:1 }}/>
+                </>
+              ):(
+                <>
+                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Divider sx={{ mb:1, mt:1 }}/>
+                </>
+              )}
+              
+              <Typography component='div'><strong>Trigger</strong> {selectedAlert.trigger}</Typography>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                 <Button variant='contained' onClick={handleCloseInfoModal}>Close</Button>
               </Box>
