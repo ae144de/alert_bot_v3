@@ -142,8 +142,8 @@ export default function AlertTable() {
           <TableBody>
             {alerts.map((alert) => (
               <TableRow key={alert.id}>
+                <TableCell>{alert.alert_id}</TableCell>
                 <TableCell>{alert.alertTitle}</TableCell>
-                <TableCell>{alert.title}</TableCell>
                 <TableCell>{alert.type}</TableCell>
                 <TableCell>
                   {alert.status === "Active" ? (
@@ -232,23 +232,23 @@ export default function AlertTable() {
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Created At:</strong> {selectedAlert.created_at}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
-              <Typography component='div'><strong>Operator</strong> {selectedAlert.operator}</Typography>
+              <Typography component='div'><strong>Operator:</strong> {selectedAlert.operator}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
               {alert.lowerBound && alert.upperBound ? (
                 <>
-                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Typography component='div'><strong>Lower Bound:</strong> {selectedAlert.lowerBound}</Typography>
                   <Divider sx={{ mb:1, mt:1 }}/>
-                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Typography component='div'><strong>Upper Bound:</strong> {selectedAlert.upperBound}</Typography>
                   <Divider sx={{ mb:1, mt:1 }}/>
                 </>
               ):(
                 <>
-                  <Typography component='div'><strong>Value</strong> {selectedAlert.value}</Typography>
+                  <Typography component='div'><strong>Value:</strong> {selectedAlert.value}</Typography>
                   <Divider sx={{ mb:1, mt:1 }}/>
                 </>
               )}
               
-              <Typography component='div'><strong>Trigger</strong> {selectedAlert.trigger}</Typography>
+              <Typography component='div'><strong>Trigger:</strong> {selectedAlert.trigger}</Typography>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                 <Button variant='contained' onClick={handleCloseInfoModal}>Close</Button>
               </Box>
