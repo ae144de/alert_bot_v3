@@ -308,9 +308,9 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
           <DemoContainer components={['DateTimePicker']}>
             <DateTimePicker
               label="Basic date time picker" 
+              defaultValue={dayjs()}
               value={expiration}
-              onChange={handleExpirationChange}
-              renderInput={(params) => <TextField {...params} fullWidth />}
+              onChange={(newValue) => setExpiration(newValue)}
             />
           </DemoContainer>
         </LocalizationProvider>
