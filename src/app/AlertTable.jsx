@@ -26,7 +26,7 @@ export default function AlertTable() {
   const [selectedAlertForDelete, setSelectedAlertForDelete] = useState(null);
 
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
-  const API_BASE_DOMAIN = "https://sonarsignals.com/";
+  const API_BASE_DOMAIN = "https://sonarsignals.com:5000/";
   //TestUpdate
   // Fetch alerts from your backend
   const fetchAlerts = async () => {
