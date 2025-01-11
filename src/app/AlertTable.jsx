@@ -26,13 +26,13 @@ export default function AlertTable() {
   const [selectedAlertForDelete, setSelectedAlertForDelete] = useState(null);
 
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
-
+  const API_BASE_DOMAIN = "https://sonarsignals.com/";
   //TestUpdate
   // Fetch alerts from your backend
   const fetchAlerts = async () => {
     console.log(`myCustomToken: ${session?.myCustomToken}`);
   
-    axios.get(`${API_BASE_URL}/api/alerts`, {
+    axios.get(`${API_BASE_DOMAIN}/api/alerts`, {
       headers: {
         Authorization: `Bearer ${session?.myCustomToken}`,
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default function AlertTable() {
       // Change the line  below for the prod version.
       // const response = await fetch(`http://localhost:5000/api/alerts/${selectedAlertForDelete.id}`, {
 
-      const response = await fetch(`${API_BASE_URL}/api/alerts/${selectedAlertForDelete.alert_id}`, {
+      const response = await fetch(`${API_BASE_DOMAIN}/api/alerts/${selectedAlertForDelete.alert_id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${session?.myCustomToken}`,
