@@ -17,7 +17,6 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
-import { Icon } from '@chakra-ui/react';
 
 export default function AlertTable() {
   const {data: session, status} = useSession()
