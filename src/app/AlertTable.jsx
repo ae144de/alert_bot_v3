@@ -15,6 +15,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 
 export default function AlertTable() {
   const {data: session, status} = useSession()
@@ -157,6 +158,12 @@ export default function AlertTable() {
                     <Box sx={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                         {/* <Typography component="div" variant='subtitle2'>E</Typography>
                         <Typography component="div" variant='subtitle2' sx={{color:'red'}}>R</Typography> */}
+                        <IconButton
+                          size = 'small'
+                          sx={{mr: 1}}
+                        >
+                          <PlayCircleOutlineIcon sx={{color:'8a8a8a'}} fontSize='inherit'/>
+                        </IconButton>
                         <IconButton
                           size='small' sx={{mr: 1}} onClick={() => handleOpenInfoModal(alert)}
                         >
