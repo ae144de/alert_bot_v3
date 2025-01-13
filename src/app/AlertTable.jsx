@@ -63,7 +63,7 @@ export default function AlertTable() {
 
   const handlePauseAlert = async (alert) => {
     try {
-      const response = await axios.post(`${API_BASE_DOMAIN}/api/alerts/${alert.alert_id}/pause`, {
+      const response = await axios.post(`${API_BASE_DOMAIN}/api/alerts/${alert.alert_id}/pause`, {}, {
         headers: {
           Authorization: `Bearer ${session?.myCustomToken}`,
           'Content-Type': 'application/json',
