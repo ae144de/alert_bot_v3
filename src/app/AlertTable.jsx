@@ -18,7 +18,7 @@ import { useSession } from 'next-auth/react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
 import io from 'socket.io-client';
-
+//dsg
 export default function AlertTable() {
   const {data: session, status} = useSession()
   const [alerts, setAlerts] = useState([]);
