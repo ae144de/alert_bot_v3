@@ -71,6 +71,7 @@ export default function AlertTable() {
       });
       if (response.status === 200) {
         console.log('Alert paused successfully');
+        fetchAlerts();
       } else {
         console.error('Failed to pause alert: ', response.statusText);
       }
@@ -102,6 +103,7 @@ export default function AlertTable() {
       });
       if (response.status === 200) {
         console.log('Alert started successfully');
+        fetchAlerts();
       } else {
         console.error('Failed to start alert: ', response.statusText);
       }
