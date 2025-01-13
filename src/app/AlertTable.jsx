@@ -17,6 +17,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@mui/icons-material/PauseCircleOutline';
+import io from 'socket.io-client';
 
 export default function AlertTable() {
   const {data: session, status} = useSession()
@@ -52,7 +53,15 @@ export default function AlertTable() {
   
   };
 
-  
+  useEffect(() => {
+    const socket = io(API_BASE_DOMAIN);
+    socket.on('alert', (data) => {
+      console.log('Received alert: ', data);
+      if (data === 'Done'){
+        fetchAlerts();
+      }
+    });
+  }, [status]);
 
   useEffect(() => {
     if (session) {
