@@ -61,6 +61,55 @@ export default function AlertTable() {
     }
   }, [session]);
 
+  const handlePauseAlert = async (alert) => {
+    try {
+      const response = await axios.post(`${API_BASE_DOMAIN}/api/alerts/${alert.alert_id}/pause`, {
+        headers: {
+          Authorization: `Bearer ${session?.myCustomToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        console.log('Alert paused successfully');
+      } else {
+        console.error('Failed to pause alert: ', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error pausing alert: ', error);
+    }
+  }
+
+  const handleStartAlert = async (alert) => {
+    try {
+      const response = await axios.post(`${API_BASE_DOMAIN}/api/alerts/${alert.alert_id}/start`, {
+        symbol: alert.symbol,
+        operator: alert.operator,
+        value: alert.value,
+        lowerBound: alert.lowerBound,
+        upperBound: alert.upperBound,
+        trigger: alert.trigger,
+        expiration: alert.expiration,
+        alertTitle: alert.alertTitle,
+        message: alert.message,
+        type: alert.type,
+        created_at: alert.created_at,
+        status: alert.status,
+      }, {
+        headers: {
+          Authorization: `Bearer ${session?.myCustomToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.status === 200) {
+        console.log('Alert started successfully');
+      } else {
+        console.error('Failed to start alert: ', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error starting alert: ', error);
+    }
+  };
+
   const handleOpenPopover = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -162,7 +211,8 @@ export default function AlertTable() {
                         {alert.status === "Active" ? (
                           <IconButton
                           size='small'
-                          sx={{mr: 1}}                                
+                          sx={{mr: 1}}     
+                          onClick={() => handlePauseAlert(alert)}                           
                           >
                             <PauseCircleOutlineIcon sx={{color:'8a8a8a'}} fontSize='inherit'/>
                           </IconButton>
@@ -170,6 +220,7 @@ export default function AlertTable() {
                           <IconButton
                             size = 'small'
                             sx={{mr: 1}}
+                            onClick={() => handleStartAlert(alert)}
                           >
                             <PlayCircleOutlineIcon sx={{color:'8a8a8a'}} fontSize='inherit'/>
                           </IconButton>
