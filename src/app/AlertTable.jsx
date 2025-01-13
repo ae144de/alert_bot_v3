@@ -58,6 +58,7 @@ export default function AlertTable() {
     socket.on('alert', (data) => {
       console.log('Received alert: ', data);
       if (data === 'Done'){
+        console.log('Alerts updated');
         fetchAlerts();
       }
     });
