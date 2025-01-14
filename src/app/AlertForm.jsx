@@ -28,7 +28,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [message, setMessage] = useState('');
   
   const API_BASE_URL = "http://ec2-13-61-169-193.eu-north-1.compute.amazonaws.com:5000/";
-
+  const API_BASE_DOMAIN = "https://sonarsignals.com";
 
   function getFormattedCurrentDate() {
     const current_date = new Date();
@@ -66,7 +66,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
     setErrorMessage('');
 
     try{
-      const response = await fetch(`${API_BASE_URL}/api/alerts`, {
+      const response = await fetch(`${API_BASE_DOMAIN}/api/alerts`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${session?.myCustomToken}`,
