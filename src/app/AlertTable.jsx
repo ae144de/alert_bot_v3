@@ -312,6 +312,8 @@ export default function AlertTable() {
               <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Created At:</strong> {selectedAlert.created_at}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
+              <Typography component='div'><strong>Expiration Date:</strong> {selectedAlert.expiration}</Typography>
+              <Divider sx={{ mb:1, mt:1 }}/>
               <Typography component='div'><strong>Operator:</strong> {selectedAlert.operator}</Typography>
               <Divider sx={{ mb:1, mt:1 }}/>
               {alert.lowerBound && alert.upperBound ? (
