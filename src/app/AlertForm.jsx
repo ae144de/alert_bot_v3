@@ -23,7 +23,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [upperBound, setUpperBound] = useState('');
   const [lowerBound, setLowerBound] = useState('');
   const [trigger, setTrigger] = useState('Only Once');
-  const [expiration, setExpiration] = useState(null);
+  const [expiration, setExpiration] = useState(days().add(7, 'day'));
   const [alertTitle, setAlertTitle] = useState('');
   const [message, setMessage] = useState('');
   
@@ -307,8 +307,8 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={['DateTimePicker']}>
             <DateTimePicker
-              label="Basic date time picker" 
-              defaultValue={dayjs().add(7, 'day')}
+              label="Expiration date" 
+              // defaultValue={dayjs().add(7, 'day')}
               value={expiration}
               onChange={(newValue) => setExpiration(newValue)}
             />
