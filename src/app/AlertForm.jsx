@@ -23,7 +23,7 @@ export default function AlertForm({ alertType, onClose, onSubmit, onBack }) {
   const [upperBound, setUpperBound] = useState('');
   const [lowerBound, setLowerBound] = useState('');
   const [trigger, setTrigger] = useState('Only Once');
-  const [expiration, setExpiration] = useState(days().add(7, 'day'));
+  const [expiration, setExpiration] = useState(dayjs().add(7, 'day'));
   const [alertTitle, setAlertTitle] = useState('');
   const [message, setMessage] = useState('');
   
