@@ -90,6 +90,25 @@ export default function AlertTable() {
     }
   }
 
+  const processDateTime = (dateTimeString) => {
+    const inputDate = new Date(dateTimeString);
+    const now = new Date();
+
+    if (isNaN(inputDate.getTime())) { 
+      throw new Error('Invalid datetime string');
+    }
+
+    const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+    if (inputDate <= todayEnd) {
+      inputDate.setDate(inputDate.getDate() + 3);
+
+      return inputDate.toISOString();
+    }
+
+    return dateTimeString;
+  };
+
   const handleStartAlert = async (alert) => {
     try {
       const response = await axios.post(`${API_BASE_DOMAIN}/api/alerts/${alert.alert_id}/start`, {
@@ -99,7 +118,8 @@ export default function AlertTable() {
         lowerBound: alert.lowerBound,
         upperBound: alert.upperBound,
         trigger: alert.trigger,
-        expiration: alert.expiration,
+        // expiration: alert.expiration,
+        expiration: processDateTime(alert.expiration),
         alertTitle: alert.alertTitle,
         message: alert.message,
         type: alert.type,
